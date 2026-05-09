@@ -36,7 +36,7 @@ export function Hero() {
       {/* Background Effects */}
       <div className="absolute inset-0 grid-bg" />
       <div className="absolute inset-0 noise" />
-      
+
       {/* Gradient Orbs */}
       <motion.div
         className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan/20 rounded-full blur-[128px]"
@@ -178,17 +178,79 @@ export function Hero() {
               />
 
               {/* Profile Container */}
-              <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                {/* Animated Border */}
-                <div className="absolute inset-0 rounded-full animated-border p-1">
-                  <div className="w-full h-full rounded-full bg-card overflow-hidden">
-                    <div className="w-full h-full bg-gradient-to-br from-cyan/10 via-transparent to-electric-blue/10 flex items-center justify-center">
-                      <div className="text-center space-y-2">
-                        <Sparkles className="w-12 h-12 mx-auto text-cyan" />
-                        <p className="text-lg font-semibold gradient-text">Tasmia Chowdhury</p>
-                        <p className="text-sm text-muted-foreground">Alif</p>
-                      </div>
-                    </div>
+              <motion.div
+                className="relative group w-72 h-72 md:w-80 md:h-80 lg:w-[26rem] lg:h-[26rem]"
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+
+                {/* Animated Glow Background */}
+                <motion.div
+                  className="absolute inset-0 rounded-full blur-3xl opacity-60"
+                  animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  style={{
+                    background:
+                      'radial-gradient(circle, rgba(6,182,212,0.45) 0%, rgba(59,130,246,0.25) 45%, rgba(99,102,241,0.15) 100%)',
+                  }}
+                />
+
+                {/* Main Image Wrapper */}
+                <div className="relative w-full h-full rounded-full p-[2px] bg-white/10 backdrop-blur-xl">
+
+                  {/* Inner Modern Border */}
+                  <div className="
+      relative
+      w-full
+      h-full
+      rounded-full
+      overflow-hidden
+      border
+      border-white/10
+      bg-black/20
+      shadow-[0_0_40px_rgba(0,0,0,0.35)]
+    ">
+
+                    {/* Subtle Inner Highlight */}
+                    <div className="absolute inset-0 rounded-full ring-1 ring-white/10 z-10 pointer-events-none" />
+
+                    {/* Profile Image */}
+                    <Image
+                      src="/images/profile.png"
+                      alt="Tasmia Chowdhury Alif"
+                      fill
+                      priority
+                      className="
+          object-cover
+          object-center
+          transition-transform
+          duration-700
+          ease-out
+          group-hover:scale-110
+        "
+                    />
+
+                    {/* Premium Gradient Overlay */}
+                    <div className="
+        absolute
+        inset-0
+        bg-gradient-to-t
+        from-black/25
+        via-transparent
+        to-cyan/10
+      " />
+
                   </div>
                 </div>
 
@@ -196,7 +258,17 @@ export function Hero() {
                 {floatingStats.map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    className="absolute glass rounded-xl px-4 py-2 shadow-lg"
+                    className="
+        absolute
+        glass
+        rounded-2xl
+        px-4
+        py-2
+        shadow-xl
+        border
+        border-white/10
+        backdrop-blur-xl
+      "
                     style={{
                       top: index === 0 ? '-10%' : index === 1 ? '30%' : '70%',
                       left: index === 0 ? '10%' : index === 1 ? '-20%' : '80%',
@@ -216,20 +288,27 @@ export function Hero() {
                       }}
                     >
                       <p className="text-lg font-bold gradient-text">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground whitespace-nowrap">{stat.label}</p>
+                      <p className="text-xs text-muted-foreground whitespace-nowrap">
+                        {stat.label}
+                      </p>
                     </motion.div>
                   </motion.div>
                 ))}
 
-                {/* Floating Tech Icons */}
+                {/* Floating Tech Icon */}
                 <motion.div
-                  className="absolute -bottom-4 left-1/2 -translate-x-1/2 glass rounded-full p-3"
+                  className="absolute -bottom-4 left-1/2 -translate-x-1/2 glass rounded-full p-3 border border-white/10 shadow-xl"
                   animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                 >
                   <FaCode className="w-6 h-6 text-cyan" />
                 </motion.div>
-              </div>
+
+              </motion.div>
             </div>
           </motion.div>
         </div>
