@@ -31,11 +31,11 @@ const techCategories = [
     bgColor: 'bg-cyan/10',
     techs: [
       { icon: SiPython, name: 'Python', color: '#3776AB' },
-      { icon: SiDjango, name: 'Django', color: '#092E20' },
+      { icon: SiDjango, name: 'Django', color: '#0C4B33' },
       { icon: SiDjango, name: 'DRF', color: '#A30000' },
       { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
       { icon: SiRedis, name: 'Redis', color: '#DC382D' },
-      { icon: SiJsonwebtokens, name: 'JWT', color: '#000000' },
+      { icon: SiJsonwebtokens, name: 'JWT', color: '#fffff' },
       { icon: SiSwagger, name: 'OpenAPI', color: '#85EA2D' },
     ],
   },
@@ -45,7 +45,7 @@ const techCategories = [
     bgColor: 'bg-electric-blue/10',
     techs: [
       { icon: SiReact, name: 'React', color: '#61DAFB' },
-      { icon: SiNextdotjs, name: 'Next.js', color: '#000000' },
+      { icon: SiNextdotjs, name: 'Next.js', color: '#fffff' },
       { icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4' },
       { icon: SiJavascript, name: 'JavaScript', color: '#F7DF1E' },
       { icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
@@ -57,9 +57,9 @@ const techCategories = [
     bgColor: 'bg-purple-500/10',
     techs: [
       { icon: SiGit, name: 'Git', color: '#F05032' },
-      { icon: SiGithub, name: 'GitHub', color: '#181717' },
+      { icon: SiGithub, name: 'GitHub', color: '#fffff' },
       { icon: SiPostman, name: 'Postman', color: '#FF6C37' },
-      { icon: SiVercel, name: 'Vercel', color: '#000000' },
+      { icon: SiVercel, name: 'Vercel', color: '#fffff' },
       { icon: SiRender, name: 'Render', color: '#46E3B7' },
       { icon: SiSupabase, name: 'Supabase', color: '#3ECF8E' },
       { icon: SiCloudinary, name: 'Cloudinary', color: '#3448C5' },
@@ -108,7 +108,7 @@ function TechCard({
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(circle at center, ${tech.color}15 0%, transparent 70%)`,
+            background: `radial-gradient(circle at center, ${tech.color}22 0%, transparent 70%)`,
           }}
         />
 
@@ -129,7 +129,7 @@ function TechCard({
           )}
           <tech.icon
             className="w-8 h-8 md:w-10 md:h-10 relative z-10 transition-colors duration-300"
-            style={{ color: isHovered ? tech.color : 'currentColor' }}
+            style={{ color:  tech.color }}
           />
         </motion.div>
 
