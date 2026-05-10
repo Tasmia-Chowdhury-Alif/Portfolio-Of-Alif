@@ -22,7 +22,7 @@ const projects = [
   {
     id: 1,
     title: 'Driver Safety Monitoring System',
-    subtitle: 'SaaS Platform',
+    subtitle: 'AI SaaS Platform',
     description:
       'Real-time driver monitoring SaaS platform that detects drowsiness and distracted driving situations using AI-based detection and scalable backend architecture.',
     features: [
@@ -41,7 +41,7 @@ const projects = [
       { icon: SiTensorflow, name: 'TensorFlow.js', color: '#FF6F00' },
     ],
     gradient: 'from-cyan via-blue-500 to-indigo',
-    image: '/images/projects/driver-safety.jpg',
+    image: '/images/projects/driver-safety.png',
     links: {
       live: '#',
       github: '#',

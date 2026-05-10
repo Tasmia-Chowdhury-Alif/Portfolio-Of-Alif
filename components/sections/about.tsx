@@ -6,7 +6,7 @@ import { Code2, Database, Users, Trophy, Terminal, GitBranch, Server } from 'luc
 
 const stats = [
   { icon: Code2, value: '592+', label: 'Problems Solved', color: 'from-cyan to-blue-500' },
-  { icon: Trophy, value: '2x', label: 'Innovation Winner', color: 'from-yellow-500 to-orange-500' },
+  { icon: Trophy, value: '2x', label: 'Innovation Fair Winner', color: 'from-yellow-500 to-orange-500' },
   { icon: Database, value: '5+', label: 'Fullstack Projects', color: 'from-electric-blue to-indigo' },
   { icon: Users, value: 'Team', label: 'Leadership', color: 'from-green-500 to-emerald-500' },
 ]
@@ -24,7 +24,7 @@ const codeSnippet = [
   { type: 'newline', content: '' },
   { type: 'property', content: '        self.name' },
   { type: 'operator', content: ' = ' },
-  { type: 'string', content: '"Tasmia Alif"' },
+  { type: 'string', content: '"Tasmia Chowdhury Alif"' },
   { type: 'newline', content: '' },
   { type: 'property', content: '        self.role' },
   { type: 'operator', content: ' = ' },
@@ -209,7 +209,7 @@ export function About() {
           >
             <div className="space-y-4 md:space-y-6">
               <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                I&apos;m a <span className="text-foreground font-medium">Backend-focused Fullstack Developer</span> with 
+                I&apos;m a <span className="text-foreground font-medium">Backend-focused Fullstack Developer </span> with 
                 hands-on experience in Python, Django, React, and RESTful API development. I&apos;m passionate 
                 about building <span className="text-cyan font-medium">secure, scalable backend systems</span> with 
                 strong problem-solving skills and a competitive programming background.

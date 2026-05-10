@@ -7,11 +7,11 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { SiLeetcode, SiCodeforces, SiCodechef } from 'react-icons/si'
 
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com', label: 'GitHub' },
-  { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: SiLeetcode, href: 'https://leetcode.com', label: 'LeetCode' },
-  { icon: SiCodeforces, href: 'https://codeforces.com', label: 'Codeforces' },
-  { icon: SiCodechef, href: 'https://codechef.com', label: 'CodeChef' },
+  { icon: FaGithub, href: 'https://github.com/Tasmia-Chowdhury-Alif', label: 'GitHub' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/tasmia-chy-alif/', label: 'LinkedIn' },
+  { icon: SiLeetcode, href: 'https://leetcode.com/u/tasmiachowdhuryalif222/', label: 'LeetCode' },
+  { icon: SiCodeforces, href: 'https://codeforces.com/profile/alif_222', label: 'Codeforces' },
+  { icon: SiCodechef, href: 'https://www.codechef.com/users/alif_222', label: 'CodeChef' },
 ]
 
 const quickLinks = [

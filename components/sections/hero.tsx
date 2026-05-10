@@ -9,12 +9,12 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com', label: 'GitHub', color: 'hover:text-foreground hover:border-foreground' },
-  { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:text-blue-500 hover:border-blue-500' },
-  { icon: Mail, href: 'mailto:contact@example.com', label: 'Email', color: 'hover:text-red-400 hover:border-red-400' },
-  { icon: SiLeetcode, href: 'https://leetcode.com', label: 'LeetCode', color: 'hover:text-yellow-500 hover:border-yellow-500' },
-  { icon: SiCodeforces, href: 'https://codeforces.com', label: 'Codeforces', color: 'hover:text-blue-400 hover:border-blue-400' },
-  { icon: SiCodechef, href: 'https://codechef.com', label: 'CodeChef', color: 'hover:text-amber-600 hover:border-amber-600' },
+  { icon: FaGithub, href: 'https://github.com/Tasmia-Chowdhury-Alif', label: 'GitHub', color: 'hover:text-foreground hover:border-foreground' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/tasmia-chy-alif/', label: 'LinkedIn', color: 'hover:text-blue-500 hover:border-blue-500' },
+  { icon: Mail, href: 'mailto:tasmiachowdhuryalif222@gamil.com', label: 'Email', color: 'hover:text-red-400 hover:border-red-400' },
+  { icon: SiLeetcode, href: 'https://leetcode.com/u/tasmiachowdhuryalif222/', label: 'LeetCode', color: 'hover:text-yellow-500 hover:border-yellow-500' },
+  { icon: SiCodeforces, href: 'https://codeforces.com/profile/alif_222', label: 'Codeforces', color: 'hover:text-blue-400 hover:border-blue-400' },
+  { icon: SiCodechef, href: 'https://www.codechef.com/users/alif_222', label: 'CodeChef', color: 'hover:text-amber-600 hover:border-amber-600' },
 ]
 
 const floatingStats = [
@@ -48,13 +48,20 @@ export function Hero() {
   }, [mouseX, mouseY])
 
   const handleDownloadResume = () => {
-    const link = document.createElement('a')
-    link.href = '/resume.pdf'
-    link.download = 'Tasmia_Chowdhury_Alif_Resume.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+    try {
+      const link = document.createElement('a');
+      link.href = '/Tasmia_Chowdhury_Alif_Resume.pdf';
+      link.download = 'Tasmia_Chowdhury_Alif_Resume.pdf';
+      link.target = '_blank';           // Good fallback
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback: open in new tab
+      window.open('/resume.pdf', '_blank');
+    }
+  };
 
   return (
     <section
