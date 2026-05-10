@@ -124,7 +124,7 @@ export function CustomCursor() {
             }}
           />
           {/* Core dot */}
-          <div className="w-4 h-4 rounded-full bg-gradient-to-br from-cyan to-electric-blue mix-blend-difference" />
+          <div className="w-2 h-2 rounded-full bg-gradient-to-br from-cyan to-electric-blue mix-blend-difference" />
         </motion.div>
       </motion.div>
 
