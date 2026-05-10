@@ -13,6 +13,7 @@ const stats = [
 
 const codeSnippet = [
   { type: 'comment', content: '# Backend Developer Profile' },
+  { type: 'newline', content: '' },
   { type: 'keyword', content: 'class' },
   { type: 'class', content: ' Developer' },
   { type: 'punctuation', content: ':' },
