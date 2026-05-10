@@ -485,11 +485,11 @@ export function Navbar() {
                   "relative flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full transition-all duration-300",
                   link.dropdown
                     ? isDropdownActive(link.dropdown)
-                      ? "text-white"
-                      : "text-muted-foreground hover:text-white"
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                     : isLinkActive(link.href)
-                      ? "text-white"
-                      : "text-muted-foreground hover:text-white",
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground hover:text-foreground",
                 )}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -546,8 +546,8 @@ export function Navbar() {
                         className={cn(
                           "relative flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200",
                           isLinkActive(item.href)
-                            ? "text-white bg-white/10"
-                            : "text-muted-foreground hover:text-white hover:bg-white/5",
+                            ? "text-foreground bg-muted"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted",
                         )}
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -663,9 +663,9 @@ export function Navbar() {
                               href={item.href}
                               className={cn(
                                 "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
-                                isLinkActive(item.href)
-                                  ? "text-white bg-white/10"
-                                  : "text-muted-foreground hover:text-white hover:bg-white/5",
+                               isLinkActive(link.href)
+  ? "text-foreground bg-muted font-medium"
+  : "text-muted-foreground hover:text-foreground hover:bg-muted",
                               )}
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
