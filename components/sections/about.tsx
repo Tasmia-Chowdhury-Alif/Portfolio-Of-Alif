@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Code2, Database, Server, Users, Trophy, Zap, Terminal, GitBranch } from 'lucide-react'
+import { Code2, Database, Users, Trophy, Terminal, GitBranch, Server } from 'lucide-react'
 
 const stats = [
   { icon: Code2, value: '592+', label: 'Problems Solved', color: 'from-cyan to-blue-500' },
@@ -55,21 +55,31 @@ export function About() {
   const isInView = useInView(containerRef, { once: true, margin: '-100px' })
 
   return (
-    <section id="about" className="relative py-24 md:py-32 overflow-hidden" ref={containerRef}>
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 grid-bg opacity-30" />
+    <section 
+      id="about" 
+      className="relative py-28 md:py-36 overflow-hidden bg-background" 
+      ref={containerRef}
+    >
+      {/* Background Effects - Theme Aware */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 grid-bg opacity-20 dark:opacity-40" />
+
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent_0px,transparent_90px,oklch(0.75_0.15_195/0.05)_90px,oklch(0.75_0.15_195/0.05)_91px)] dark:bg-[repeating-linear-gradient(90deg,transparent_0px,transparent_90px,oklch(0.75_0.15_195/0.09)_90px,oklch(0.75_0.15_195/0.09)_91px)]" />
+
+        {/* Dark Mode Glow */}
         <motion.div
-          className="absolute top-1/4 -right-32 w-96 h-96 rounded-full"
+          className="absolute top-20 right-10 w-[650px] h-[650px] rounded-full hidden dark:block"
           style={{
-            background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.1) 0%, transparent 70%)',
-            filter: 'blur(60px)',
+            background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.14) 0%, transparent 65%)',
+            filter: 'blur(85px)',
           }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ scale: [1, 1.08, 1], opacity: [0.7, 0.85, 0.7] }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
+
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan/5 to-transparent dark:from-cyan/10" />
       </div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -95,7 +105,7 @@ export function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Terminal/Code Visual Card */}
+          {/* Left - Terminal Card (Always Dark) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -105,45 +115,42 @@ export function About() {
             <div className="relative">
               {/* Glow effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan/10 via-electric-blue/10 to-indigo/10 rounded-3xl blur-2xl" />
-              
-              {/* Terminal Window */}
-              <div className="relative rounded-2xl overflow-hidden border border-border/50 bg-card/80 backdrop-blur-xl shadow-2xl">
+
+              {/* Terminal Window - Forced Dark */}
+              <div className="relative rounded-2xl overflow-hidden border border-zinc-700 bg-[#0a0a0f] shadow-2xl">
                 {/* Terminal Header */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border/50">
+                <div className="flex items-center gap-2 px-4 py-3 bg-[#1a1a1f] border-b border-zinc-700">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500/80" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                     <div className="w-3 h-3 rounded-full bg-green-500/80" />
                   </div>
                   <div className="flex-1 text-center">
-                    <span className="text-xs text-muted-foreground font-mono flex items-center justify-center gap-2">
-                      <Terminal className="w-3 h-3" />
-                      developer.py
+                    <span className="text-xs text-zinc-400 font-mono flex items-center justify-center gap-2">
+                      <Server className="w-3 h-3" /> developer.py
                     </span>
                   </div>
-                  <GitBranch className="w-3 h-3 text-muted-foreground" />
+                  <GitBranch className="w-3 h-3 text-zinc-400" />
                 </div>
 
                 {/* Code Content */}
-                <div className="p-4 md:p-6 font-mono text-sm overflow-x-auto">
+                <div className="p-4 md:p-6 font-mono text-sm overflow-x-auto bg-[#0a0a0f]">
                   <div className="space-y-0">
                     {codeSnippet.map((token, index) => {
-                      if (token.type === 'newline') {
-                        return <br key={index} />
-                      }
-                      
+                      if (token.type === 'newline') return <br key={index} />
+
                       const colorClass = {
-                        comment: 'text-muted-foreground',
+                        comment: 'text-zinc-500',
                         keyword: 'text-pink-400',
                         class: 'text-yellow-400',
                         function: 'text-blue-400',
-                        punctuation: 'text-foreground',
-                        property: 'text-foreground',
+                        punctuation: 'text-zinc-300',
+                        property: 'text-zinc-300',
                         operator: 'text-cyan',
                         string: 'text-green-400',
                         array: 'text-orange-400',
                         number: 'text-purple-400',
-                      }[token.type] || 'text-foreground'
+                      }[token.type] || 'text-zinc-300'
 
                       return (
                         <motion.span
@@ -166,7 +173,7 @@ export function About() {
                 </div>
 
                 {/* Skill Tags */}
-                <div className="px-4 md:px-6 pb-4 md:pb-6">
+                <div className="px-4 md:px-6 pb-4 md:pb-6 bg-[#0a0a0f] border-t border-zinc-800">
                   <div className="flex flex-wrap gap-2">
                     {highlights.slice(0, 4).map((item, index) => (
                       <motion.span
@@ -174,7 +181,7 @@ export function About() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ delay: 0.8 + index * 0.05 }}
-                        className="px-3 py-1.5 rounded-lg bg-secondary/50 text-xs font-medium border border-border/50"
+                        className="px-3 py-1.5 rounded-lg bg-zinc-900 text-xs font-medium border border-zinc-700 text-zinc-300"
                       >
                         {item}
                       </motion.span>
@@ -193,7 +200,7 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Right - Content */}
+          {/* Right Content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -207,7 +214,7 @@ export function About() {
                 about building <span className="text-cyan font-medium">secure, scalable backend systems</span> with 
                 strong problem-solving skills and a competitive programming background.
               </p>
-              
+
               <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
                 With experience leading team projects and working on{' '}
                 <span className="text-electric-blue font-medium">SaaS architecture</span>, I focus on creating 
@@ -227,9 +234,8 @@ export function About() {
                   className="group relative"
                 >
                   <div className="relative rounded-xl p-4 md:p-5 bg-card/50 backdrop-blur-sm border border-border/50 hover:border-cyan/30 transition-all duration-300 overflow-hidden">
-                    {/* Hover gradient */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                    
+
                     <div className="relative flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center flex-shrink-0`}>
                         <stat.icon className="w-5 h-5 text-white" />

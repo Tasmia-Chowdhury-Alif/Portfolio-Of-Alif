@@ -1,10 +1,10 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaCode } from 'react-icons/fa'
 import { SiLeetcode, SiCodeforces, SiCodechef } from 'react-icons/si'
-import { Mail, Download, ArrowRight } from 'lucide-react'
+import { Mail, Download, ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
@@ -26,9 +26,28 @@ const floatingStats = [
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  
+  // Parallax effect for profile image
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 })
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
+      mouseX.set((clientX - innerWidth / 2) / 50)
+      mouseY.set((clientY - innerHeight / 2) / 50)
+      setMousePosition({ x: clientX / innerWidth, y: clientY / innerHeight })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [mouseX, mouseY])
 
   const handleDownloadResume = () => {
-    // Create a link element and trigger download
     const link = document.createElement('a')
     link.href = '/resume.pdf'
     link.download = 'Tasmia_Chowdhury_Alif_Resume.pdf'
@@ -41,23 +60,44 @@ export function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-10"
+      className="relative min-h-[100svh] lg:min-h-[90vh] xl:min-h-[85vh] 2xl:min-h-[80vh] flex items-center justify-center overflow-hidden pt-20 pb-24 md:pb-16"
     >
       {/* Animated Background Effects */}
       <div className="absolute inset-0">
         {/* Animated gradient mesh */}
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0">
           <motion.div
             className="absolute top-0 left-0 w-full h-full"
             style={{
-              background: 'radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.75 0.15 195 / 0.3), transparent)',
+              background: 'radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.75 0.15 195 / 0.25), transparent)',
             }}
             animate={{
-              opacity: [0.3, 0.5, 0.3],
+              opacity: [0.2, 0.4, 0.2],
             }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
+          <motion.div
+            className="absolute bottom-0 right-0 w-full h-full"
+            style={{
+              background: 'radial-gradient(ellipse 60% 40% at 80% 100%, oklch(0.65 0.22 260 / 0.15), transparent)',
+            }}
+            animate={{
+              opacity: [0.15, 0.3, 0.15],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          />
         </div>
+
+        {/* Interactive spotlight that follows mouse */}
+        <motion.div
+          className="absolute w-[600px] h-[600px] rounded-full pointer-events-none hidden md:block"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.08) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            left: `calc(${mousePosition.x * 100}% - 300px)`,
+            top: `calc(${mousePosition.y * 100}% - 300px)`,
+          }}
+        />
 
         {/* Grid background */}
         <div className="absolute inset-0 grid-bg opacity-40" />
@@ -67,9 +107,9 @@ export function Hero() {
 
         {/* Floating orbs */}
         <motion.div
-          className="absolute top-1/4 left-[10%] w-64 h-64 md:w-96 md:h-96 rounded-full"
+          className="absolute top-1/4 left-[5%] w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full"
           style={{
-            background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.12) 0%, transparent 70%)',
             filter: 'blur(60px)',
           }}
           animate={{
@@ -80,9 +120,9 @@ export function Hero() {
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-[10%] w-64 h-64 md:w-96 md:h-96 rounded-full"
+          className="absolute bottom-1/4 right-[5%] w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full"
           style={{
-            background: 'radial-gradient(circle, oklch(0.65 0.22 260 / 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, oklch(0.65 0.22 260 / 0.12) 0%, transparent 70%)',
             filter: 'blur(60px)',
           }}
           animate={{
@@ -93,8 +133,30 @@ export function Hero() {
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
 
+        {/* Additional floating particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-cyan/40 hidden md:block"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 4 + i,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+
         {/* Animated lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="transparent" />
@@ -103,7 +165,7 @@ export function Hero() {
             </linearGradient>
           </defs>
           <motion.line
-            x1="0" y1="30%" x2="100%" y2="30%"
+            x1="0" y1="25%" x2="100%" y2="25%"
             stroke="url(#lineGradient)"
             strokeWidth="1"
             initial={{ pathLength: 0, opacity: 0 }}
@@ -111,7 +173,7 @@ export function Hero() {
             transition={{ duration: 3, delay: 1 }}
           />
           <motion.line
-            x1="0" y1="70%" x2="100%" y2="70%"
+            x1="0" y1="75%" x2="100%" y2="75%"
             stroke="url(#lineGradient)"
             strokeWidth="1"
             initial={{ pathLength: 0, opacity: 0 }}
@@ -122,9 +184,9 @@ export function Hero() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center max-w-7xl mx-auto">
           {/* Left Content */}
-          <div className="space-y-6 md:space-y-8 text-center lg:text-left order-2 lg:order-1">
+          <div className="space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -148,7 +210,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-3 md:space-y-4"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-bold leading-tight">
                 <span className="text-foreground">Backend-Focused</span>
                 <br />
                 <span className="gradient-text">Fullstack Developer</span>
@@ -224,32 +286,72 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content - Profile Image with Effects */}
+          {/* Right Content - Profile Image with Modern Effects */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative flex justify-center lg:justify-end order-1 lg:order-2"
           >
-            <div className="relative">
-              {/* Glow Ring */}
+            <motion.div 
+              className="relative"
+              style={{ x: springX, y: springY }}
+            >
+              {/* Outer Glow Aura */}
               <motion.div
-                className="absolute -inset-4 rounded-full opacity-50"
+                className="absolute -inset-8 md:-inset-12 rounded-full opacity-40"
                 style={{
-                  background: 'conic-gradient(from 0deg, oklch(0.75 0.15 195 / 0.5), oklch(0.65 0.22 260 / 0.5), oklch(0.55 0.2 280 / 0.5), oklch(0.75 0.15 195 / 0.5))',
-                  filter: 'blur(30px)',
+                  background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.3) 0%, oklch(0.65 0.22 260 / 0.1) 50%, transparent 70%)',
+                  filter: 'blur(40px)',
                 }}
                 animate={{
-                  rotate: [0, 360],
+                  scale: [1, 1.1, 1],
+                  opacity: [0.3, 0.5, 0.3],
                 }}
                 transition={{
-                  rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+
+              {/* Animated Gradient Ring */}
+              <motion.div
+                className="absolute -inset-[3px] rounded-full"
+                style={{
+                  background: 'conic-gradient(from var(--angle), oklch(0.75 0.15 195), oklch(0.65 0.22 260), oklch(0.55 0.2 280), oklch(0.75 0.15 195))',
+                  '--angle': '0deg',
+                } as React.CSSProperties}
+                animate={{
+                  '--angle': ['0deg', '360deg'],
+                } as { '--angle': string[] }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              />
+
+              {/* Secondary spinning glow */}
+              <motion.div
+                className="absolute -inset-6 rounded-full opacity-30"
+                style={{
+                  background: 'conic-gradient(from 180deg, transparent 60%, oklch(0.75 0.15 195 / 0.6) 70%, transparent 80%)',
+                  filter: 'blur(20px)',
+                }}
+                animate={{
+                  rotate: [0, -360],
+                }}
+                transition={{
+                  duration: 12,
+                  repeat: Infinity,
+                  ease: 'linear',
                 }}
               />
 
               {/* Profile Container */}
               <motion.div
-                className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80"
+                className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-72 lg:h-72 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96"
                 animate={{ y: [0, -8, 0] }}
                 transition={{
                   duration: 6,
@@ -257,16 +359,16 @@ export function Hero() {
                   ease: 'easeInOut',
                 }}
               >
-                {/* Animated Glow Background */}
+                {/* Inner glow behind image */}
                 <motion.div
-                  className="absolute inset-0 rounded-full"
+                  className="absolute inset-2 rounded-full"
                   style={{
-                    background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.4) 0%, oklch(0.65 0.22 260 / 0.2) 50%, transparent 70%)',
-                    filter: 'blur(40px)',
+                    background: 'radial-gradient(circle, oklch(0.75 0.15 195 / 0.2) 0%, transparent 60%)',
+                    filter: 'blur(30px)',
                   }}
                   animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.5, 0.8, 0.5],
+                    scale: [1, 1.15, 1],
+                    opacity: [0.4, 0.7, 0.4],
                   }}
                   transition={{
                     duration: 5,
@@ -275,11 +377,12 @@ export function Hero() {
                   }}
                 />
 
-                {/* Main Image Wrapper */}
-                <div className="relative w-full h-full rounded-full p-[3px] bg-gradient-to-br from-cyan via-electric-blue to-indigo">
+                {/* Main Image Wrapper with glassmorphism */}
+                <div className="relative w-full h-full rounded-full p-[2px] bg-gradient-to-br from-cyan/80 via-electric-blue/60 to-indigo/80">
                   <div className="relative w-full h-full rounded-full overflow-hidden bg-background">
-                    {/* Inner ring highlight */}
-                    <div className="absolute inset-0 rounded-full ring-1 ring-white/20 z-10 pointer-events-none" />
+                    {/* Glassmorphism inner ring */}
+                    <div className="absolute inset-0 rounded-full ring-1 ring-white/30 z-10 pointer-events-none" />
+                    <div className="absolute inset-2 rounded-full ring-1 ring-white/10 z-10 pointer-events-none" />
 
                     {/* Profile Image */}
                     <Image
@@ -290,21 +393,35 @@ export function Hero() {
                       className="object-cover object-center transition-transform duration-700 ease-out hover:scale-110"
                     />
 
-                    {/* Gradient Overlay */}
+                    {/* Gradient Overlay for depth */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-cyan/10" />
+                    
+                    {/* Light sweep animation */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                      animate={{
+                        x: ['-200%', '200%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: 5,
+                        ease: 'easeInOut',
+                      }}
+                    />
                   </div>
                 </div>
 
-                {/* Floating Stats - Responsive positioning */}
+                {/* Floating Stats - Better responsive positioning */}
                 {floatingStats.map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    className={`absolute hidden sm:block glass rounded-xl px-3 py-2 shadow-xl border border-border/50 backdrop-blur-xl ${
+                    className={`absolute hidden sm:block glass rounded-xl px-3 py-2 shadow-xl border border-white/10 backdrop-blur-xl ${
                       stat.position === 'top-left' 
-                        ? '-top-4 -left-4 md:-top-6 md:-left-8' 
+                        ? '-top-2 -left-4 md:-top-4 md:-left-8 lg:-left-12' 
                         : stat.position === 'middle-left'
-                        ? 'top-1/3 -left-12 md:-left-20'
-                        : 'bottom-4 -right-4 md:-right-12'
+                        ? 'top-1/2 -translate-y-1/2 -left-14 md:-left-20 lg:-left-24'
+                        : 'bottom-4 -right-4 md:-right-8 lg:-right-12'
                     }`}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -327,9 +444,9 @@ export function Hero() {
                   </motion.div>
                 ))}
 
-                {/* Floating Tech Icon */}
+                {/* Floating Tech Icon with glow */}
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 glass rounded-full p-2.5 md:p-3 border border-border/50 shadow-xl"
+                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 glass rounded-full p-2.5 md:p-3 border border-white/10 shadow-xl"
                   animate={{ y: [0, -6, 0] }}
                   transition={{
                     duration: 4,
@@ -337,37 +454,46 @@ export function Hero() {
                     ease: 'easeInOut',
                   }}
                 >
-                  <FaCode className="w-5 h-5 md:w-6 md:h-6 text-cyan" />
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-cyan/20 blur-md"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <FaCode className="w-5 h-5 md:w-6 md:h-6 text-cyan relative z-10" />
                 </motion.div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator - Positioned better to avoid overlap */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.a
-            href="#about"
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <span className="text-xs font-medium hidden sm:block">Scroll Down</span>
-            <div className="w-5 h-8 rounded-full border-2 border-current/30 flex justify-center pt-2">
-              <motion.div
-                className="w-1 h-2 bg-cyan rounded-full"
-                animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            </div>
-          </motion.a>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator - Fixed positioning to avoid overlap on mobile */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20"
+      >
+        <motion.a
+          href="#about"
+          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <span className="text-xs font-medium hidden md:block">Scroll Down</span>
+          <motion.div
+            className="w-6 h-10 rounded-full border-2 border-current/30 flex justify-center pt-2 backdrop-blur-sm"
+            whileHover={{ borderColor: 'oklch(0.75 0.15 195)' }}
+          >
+            <motion.div
+              className="w-1.5 h-2.5 bg-gradient-to-b from-cyan to-electric-blue rounded-full"
+              animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+          </motion.div>
+          <ChevronDown className="w-4 h-4 md:hidden animate-bounce" />
+        </motion.a>
+      </motion.div>
     </section>
   )
 }

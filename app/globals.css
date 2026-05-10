@@ -189,26 +189,43 @@
   box-shadow: 0 0 20px oklch(0.75 0.15 195 / 0.3), 0 0 40px oklch(0.75 0.15 195 / 0.1);
 }
 
-/* Grid background */
+/* Grid Background */
 .grid-bg {
   background-image: 
-    linear-gradient(oklch(0.5 0.1 260 / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(0.5 0.1 260 / 0.03) 1px, transparent 1px);
+    linear-gradient(oklch(0.5 0.1 260 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.5 0.1 260 / 0.06) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
 /* Noise overlay */
+.noise {
+  position: relative;
+  overflow: hidden;
+}
+
 .noise::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.02;
+  opacity: 0.045;           /* Increased visibility */
   pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Optional: Stronger noise in dark mode */
+.dark .noise::before {
+  opacity: 0.06;
 }
 
 /* Animated gradient border */
 @property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-angle {
   syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
@@ -226,6 +243,22 @@
 @keyframes rotate-border {
   to {
     --angle: 360deg;
+  }
+}
+
+/* Hero profile image animated border - fallback for browsers without @property */
+@supports not (background: paint(something)) {
+  .hero-profile-ring {
+    animation: hero-ring-rotate 8s linear infinite;
+  }
+  
+  @keyframes hero-ring-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 
