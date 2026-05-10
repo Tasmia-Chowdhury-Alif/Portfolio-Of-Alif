@@ -17,6 +17,8 @@ import {
 } from 'react-icons/si'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Navbar } from '@/components/sections/navbar';
+import { Footer } from '@/components/sections/footer'
 
 const projects = [
   {
@@ -281,226 +283,230 @@ export default function ProjectDetailPage() {
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className={`relative py-20 md:py-32 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 right-10 w-64 h-64 border border-white/30 rounded-full" />
-          <div className="absolute bottom-10 left-10 w-48 h-48 border border-white/20 rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/10 rounded-full" />
-        </div>
+    <>
+        <Navbar/>
+        <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className={`relative py-20 md:py-32 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+            {/* Decorative elements */}
+            <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-10 right-10 w-64 h-64 border border-white/30 rounded-full" />
+            <div className="absolute bottom-10 left-10 w-48 h-48 border border-white/20 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/10 rounded-full" />
+            </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mb-8"
-          >
-            <Button
-              variant="ghost"
-              onClick={() => router.push('/#projects')}
-              className="text-white/80 hover:text-white hover:bg-white/10"
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            {/* Back Button */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="mb-8"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Projects
-            </Button>
-          </motion.div>
+                <Button
+                variant="ghost"
+                onClick={() => router.push('/#projects')}
+                className="text-white/80 hover:text-white hover:bg-white/10"
+                >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Projects
+                </Button>
+            </motion.div>
 
-          {/* Project Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium text-white mb-4">
-              {project.subtitle}
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-              {project.title}
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-6">
-              {project.longDescription}
-            </p>
-
-            {/* Meta Info */}
-            <div className="flex flex-wrap gap-4 mb-8">
-              <div className="flex items-center gap-2 text-white/80">
-                <Calendar className="w-4 h-4" />
-                <span className="text-sm">{project.timeline}</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/80">
-                <Users className="w-4 h-4" />
-                <span className="text-sm">{project.teamSize}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  project.status === 'Live' ? 'bg-green-500/20 text-green-200' : 'bg-yellow-500/20 text-yellow-200'
-                }`}>
-                  {project.status}
+            {/* Project Info */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="max-w-3xl"
+            >
+                <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium text-white mb-4">
+                {project.subtitle}
                 </span>
-              </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                {project.title}
+                </h1>
+                <p className="text-lg md:text-xl text-white/80 mb-6">
+                {project.longDescription}
+                </p>
+
+                {/* Meta Info */}
+                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2 text-white/80">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-sm">{project.timeline}</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/80">
+                    <Users className="w-4 h-4" />
+                    <span className="text-sm">{project.teamSize}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    project.status === 'Live' ? 'bg-green-500/20 text-green-200' : 'bg-yellow-500/20 text-yellow-200'
+                    }`}>
+                    {project.status}
+                    </span>
+                </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-3">
+                {project.links.live && (
+                    <Button className="bg-white text-gray-900 hover:bg-white/90" asChild>
+                    <a href={project.links.live} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Live Demo
+                    </a>
+                    </Button>
+                )}
+                {project.links.github && (
+                    <Button variant="outline" className="border-white/50 text-white hover:bg-white/10" asChild>
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4 mr-2" />
+                        Source Code
+                    </a>
+                    </Button>
+                )}
+                {project.links.docs && (
+                    <Button variant="outline" className="border-white/50 text-white hover:bg-white/10" asChild>
+                    <a href={project.links.docs} target="_blank" rel="noopener noreferrer">
+                        <FileCode className="w-4 h-4 mr-2" />
+                        API Docs
+                    </a>
+                    </Button>
+                )}
+                </div>
+            </motion.div>
             </div>
+        </section>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap gap-3">
-              {project.links.live && (
-                <Button className="bg-white text-gray-900 hover:bg-white/90" asChild>
-                  <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </a>
-                </Button>
-              )}
-              {project.links.github && (
-                <Button variant="outline" className="border-white/50 text-white hover:bg-white/10" asChild>
-                  <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                    <Github className="w-4 h-4 mr-2" />
-                    Source Code
-                  </a>
-                </Button>
-              )}
-              {project.links.docs && (
-                <Button variant="outline" className="border-white/50 text-white hover:bg-white/10" asChild>
-                  <a href={project.links.docs} target="_blank" rel="noopener noreferrer">
-                    <FileCode className="w-4 h-4 mr-2" />
-                    API Docs
-                  </a>
-                </Button>
-              )}
+        {/* Content Section */}
+        <section className="py-16 md:py-24">
+            <div className="container mx-auto px-4 sm:px-6">
+            <div className="max-w-4xl mx-auto">
+                {/* Tech Stack */}
+                <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mb-12"
+                >
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <Zap className="w-5 h-5 text-cyan" />
+                    Technology Stack
+                </h2>
+                <div className="flex flex-wrap gap-4">
+                    {project.tech.map((tech) => (
+                    <div
+                        key={tech.name}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card border border-border/50"
+                    >
+                        <tech.icon className="w-6 h-6" style={{ color: tech.color }} />
+                        <span className="font-medium">{tech.name}</span>
+                    </div>
+                    ))}
+                </div>
+                </motion.div>
+
+                {/* Features */}
+                <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mb-12"
+                >
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    Key Features
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-3">
+                    {project.features.map((feature, index) => (
+                    <motion.div
+                        key={feature}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 + index * 0.05 }}
+                        className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50"
+                    >
+                        <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
+                    </motion.div>
+                    ))}
+                </div>
+                </motion.div>
+
+                {/* Challenges */}
+                <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mb-12"
+                >
+                <h2 className="text-2xl font-bold mb-6">Challenges Faced</h2>
+                <div className="space-y-3">
+                    {project.challenges.map((challenge, index) => (
+                    <div
+                        key={index}
+                        className="p-4 rounded-lg bg-orange-500/5 border border-orange-500/20"
+                    >
+                        <p className="text-sm">{challenge}</p>
+                    </div>
+                    ))}
+                </div>
+                </motion.div>
+
+                {/* Future Improvements */}
+                <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mb-12"
+                >
+                <h2 className="text-2xl font-bold mb-6">Future Improvements</h2>
+                <div className="grid sm:grid-cols-2 gap-3">
+                    {project.futureImprovements.map((improvement, index) => (
+                    <div
+                        key={index}
+                        className="p-4 rounded-lg bg-cyan/5 border border-cyan/20"
+                    >
+                        <p className="text-sm">{improvement}</p>
+                    </div>
+                    ))}
+                </div>
+                </motion.div>
+
+                {/* Navigation */}
+                <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="flex items-center justify-between pt-8 border-t border-border/50"
+                >
+                {prevProject ? (
+                    <Link href={`/projects/${prevProject.id}`}>
+                    <Button variant="ghost" className="gap-2">
+                        <ArrowLeft className="w-4 h-4" />
+                        {prevProject.title}
+                    </Button>
+                    </Link>
+                ) : (
+                    <div />
+                )}
+                {nextProject ? (
+                    <Link href={`/projects/${nextProject.id}`}>
+                    <Button variant="ghost" className="gap-2">
+                        {nextProject.title}
+                        <ArrowRight className="w-4 h-4" />
+                    </Button>
+                    </Link>
+                ) : (
+                    <div />
+                )}
+                </motion.div>
             </div>
-          </motion.div>
+            </div>
+        </section>
         </div>
-      </section>
-
-      {/* Content Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto">
-            {/* Tech Stack */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-cyan" />
-                Technology Stack
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                {project.tech.map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card border border-border/50"
-                  >
-                    <tech.icon className="w-6 h-6" style={{ color: tech.color }} />
-                    <span className="font-medium">{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                Key Features
-              </h2>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {project.features.map((feature, index) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + index * 0.05 }}
-                    className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50"
-                  >
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Challenges */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold mb-6">Challenges Faced</h2>
-              <div className="space-y-3">
-                {project.challenges.map((challenge, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg bg-orange-500/5 border border-orange-500/20"
-                  >
-                    <p className="text-sm">{challenge}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Future Improvements */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold mb-6">Future Improvements</h2>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {project.futureImprovements.map((improvement, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg bg-cyan/5 border border-cyan/20"
-                  >
-                    <p className="text-sm">{improvement}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Navigation */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex items-center justify-between pt-8 border-t border-border/50"
-            >
-              {prevProject ? (
-                <Link href={`/projects/${prevProject.id}`}>
-                  <Button variant="ghost" className="gap-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    {prevProject.title}
-                  </Button>
-                </Link>
-              ) : (
-                <div />
-              )}
-              {nextProject ? (
-                <Link href={`/projects/${nextProject.id}`}>
-                  <Button variant="ghost" className="gap-2">
-                    {nextProject.title}
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </Link>
-              ) : (
-                <div />
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-    </div>
+        <Footer/>
+    </>
   )
 }
