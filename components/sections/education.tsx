@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react'
+import { GraduationCap, Calendar, MapPin, Award, BookOpen } from 'lucide-react'
 
 const educationData = [
   {
@@ -13,7 +13,7 @@ const educationData = [
     period: 'Completed',
     description: 'Secondary School Certificate with strong foundation in science and mathematics.',
     achievements: ['Strong academic performance', 'Science background'],
-    icon: GraduationCap,
+    icon: BookOpen,
     color: 'from-green-500 to-emerald-500',
   },
   {
@@ -52,108 +52,195 @@ function TimelineItem({
   item,
   index,
   isInView,
+  isLast,
 }: {
   item: (typeof educationData)[0]
   index: number
   isInView: boolean
+  isLast: boolean
 }) {
   const Icon = item.icon
-  const isEven = index % 2 === 0
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      className={`relative flex items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:gap-8`}
+      className="relative"
     >
-      {/* Content Card */}
-      <motion.div
-        className={`w-full lg:w-1/2 ${isEven ? 'lg:pr-8 lg:text-right' : 'lg:pl-8 lg:text-left'}`}
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        <div className="relative group">
-          {/* Glow effect */}
-          <div
-            className={`absolute -inset-2 bg-gradient-to-r ${item.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}
+      {/* Desktop Layout */}
+      <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
+        {/* Left Side - Icon, Title, Timeline */}
+        <div className={`flex flex-col ${index % 2 === 0 ? 'items-end text-right' : 'order-3 items-start text-left'}`}>
+          <motion.div
+            className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg mb-3`}
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : {}}
+            transition={{ delay: index * 0.2 + 0.2, type: 'spring' }}
+          >
+            <Icon className="w-7 h-7 text-white" />
+          </motion.div>
+          <h3 className="text-xl font-bold mb-1">{item.degree}</h3>
+          <h4 className="text-base text-muted-foreground">{item.institution}</h4>
+        </div>
+
+        {/* Center - Timeline Node */}
+        <div className="relative flex flex-col items-center">
+          {/* Node */}
+          <motion.div
+            className={`relative z-10 w-5 h-5 rounded-full bg-gradient-to-br ${item.color} border-4 border-background shadow-lg`}
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : {}}
+            transition={{ delay: index * 0.2 + 0.3, type: 'spring' }}
           />
-
-          <div className="relative glass rounded-2xl p-6 border border-border/50 hover:border-cyan/30 transition-all duration-300">
-            {/* Current Badge */}
-            {item.current && (
-              <motion.span
-                className="absolute -top-3 right-6 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-cyan to-electric-blue text-background"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                Current
-              </motion.span>
-            )}
-
-            {/* Icon */}
+          {/* Pulse for current */}
+          {item.current && (
             <motion.div
-              className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 ${isEven ? 'lg:ml-auto' : ''}`}
-              whileHover={{ rotate: 5, scale: 1.1 }}
-            >
-              <Icon className="w-6 h-6 text-background" />
-            </motion.div>
+              className={`absolute top-0 w-5 h-5 rounded-full bg-gradient-to-br ${item.color}`}
+              animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          )}
+          {/* Line */}
+          {!isLast && (
+            <motion.div
+              className="w-0.5 flex-1 bg-gradient-to-b from-border to-border/30 mt-2"
+              initial={{ height: 0 }}
+              animate={isInView ? { height: '100%' } : {}}
+              transition={{ delay: index * 0.2 + 0.4, duration: 0.5 }}
+            />
+          )}
+        </div>
 
-            {/* Content */}
-            <h3 className="text-xl font-bold mb-1">{item.degree}</h3>
-            <h4 className="text-lg text-muted-foreground mb-2">{item.institution}</h4>
+        {/* Right Side - Details */}
+        <div className={`${index % 2 === 0 ? 'order-3' : ''}`}>
+          <motion.div
+            className="relative group"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            {/* Glow effect */}
+            <div className={`absolute -inset-2 bg-gradient-to-r ${item.color} rounded-2xl opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`} />
+            
+            <div className="relative rounded-2xl p-5 bg-card/50 backdrop-blur-sm border border-border/50 hover:border-border transition-colors duration-300">
+              {/* Current Badge */}
+              {item.current && (
+                <motion.span
+                  className={`absolute -top-2.5 left-4 px-3 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r ${item.color} text-white shadow-lg`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  Current
+                </motion.span>
+              )}
 
-            <div
-              className={`flex items-center gap-4 text-sm text-muted-foreground mb-4 ${isEven ? 'lg:justify-end' : ''} flex-wrap`}
-            >
-              <span className="flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
-                {item.location}
-              </span>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                {item.period}
-              </span>
+              {/* Meta Info */}
+              <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-3 mt-1">
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  {item.location}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {item.period}
+                </span>
+              </div>
+
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{item.description}</p>
+
+              {/* Achievements */}
+              <div className="flex flex-wrap gap-2">
+                {item.achievements.map((achievement) => (
+                  <span
+                    key={achievement}
+                    className="px-2.5 py-1 rounded-lg text-xs font-medium bg-secondary/50 text-secondary-foreground border border-border/50"
+                  >
+                    {achievement}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden">
+        <div className="flex gap-4">
+          {/* Timeline line & node */}
+          <div className="flex flex-col items-center">
+            <motion.div
+              className={`relative z-10 w-4 h-4 rounded-full bg-gradient-to-br ${item.color} border-2 border-background shadow-md flex-shrink-0`}
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : {}}
+              transition={{ delay: index * 0.2, type: 'spring' }}
+            />
+            {item.current && (
+              <motion.div
+                className={`absolute w-4 h-4 rounded-full bg-gradient-to-br ${item.color}`}
+                animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            )}
+            {!isLast && (
+              <div className="w-0.5 flex-1 bg-gradient-to-b from-border to-border/30 mt-2" />
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 pb-8">
+            <div className="flex items-start gap-3 mb-3">
+              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-md flex-shrink-0`}>
+                <Icon className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-base font-bold">{item.degree}</h3>
+                  {item.current && (
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r ${item.color} text-white`}>
+                      Current
+                    </span>
+                  )}
+                </div>
+                <h4 className="text-sm text-muted-foreground">{item.institution}</h4>
+              </div>
             </div>
 
-            <p className="text-muted-foreground mb-4">{item.description}</p>
-
-            {/* Achievements */}
-            <div className={`flex flex-wrap gap-2 ${isEven ? 'lg:justify-end' : ''}`}>
-              {item.achievements.map((achievement) => (
-                <span
-                  key={achievement}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground"
-                >
-                  {achievement}
+            <div className="rounded-xl p-4 bg-card/50 backdrop-blur-sm border border-border/50">
+              <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-3">
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  {item.location}
                 </span>
-              ))}
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  {item.period}
+                </span>
+              </div>
+
+              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{item.description}</p>
+
+              <div className="flex flex-wrap gap-1.5">
+                {item.achievements.slice(0, 3).map((achievement) => (
+                  <span
+                    key={achievement}
+                    className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-secondary/50 text-secondary-foreground"
+                  >
+                    {achievement}
+                  </span>
+                ))}
+                {item.achievements.length > 3 && (
+                  <span className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-secondary/30 text-muted-foreground">
+                    +{item.achievements.length - 3}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </motion.div>
-
-      {/* Timeline Node */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center z-10 hidden lg:flex">
-        <motion.div
-          className={`w-6 h-6 rounded-full bg-gradient-to-br ${item.color} border-4 border-background shadow-lg`}
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ delay: index * 0.2 + 0.3, type: 'spring' }}
-          whileHover={{ scale: 1.3 }}
-        />
-        {item.current && (
-          <motion.div
-            className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${item.color} opacity-30`}
-            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        )}
       </div>
-
-      {/* Empty space for opposite side */}
-      <div className="hidden lg:block w-1/2" />
     </motion.div>
   )
 }
@@ -168,27 +255,31 @@ export function Education() {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ['0%', '100%'])
 
   return (
-    <section id="education" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="education" className="relative py-24 md:py-32 overflow-hidden" ref={containerRef}>
       {/* Background */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <motion.div
-        className="absolute top-1/3 left-0 w-96 h-96 bg-indigo/10 rounded-full blur-[150px]"
-        animate={{
-          y: [0, 50, 0],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 grid-bg opacity-20" />
+        <motion.div
+          className="absolute top-1/3 left-0 w-96 h-96 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.55 0.2 280 / 0.08) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+          animate={{ y: [0, 50, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <motion.span
-            className="inline-block px-4 py-1.5 rounded-full glass text-sm font-medium text-cyan mb-4"
+            className="inline-block px-4 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 text-sm font-medium text-cyan mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.1 }}
@@ -198,15 +289,15 @@ export function Education() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Academic <span className="gradient-text">Journey</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
             My educational path towards becoming a professional software engineer
           </p>
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Center Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border/50 -translate-x-1/2 hidden lg:block">
+        <div className="relative max-w-4xl mx-auto">
+          {/* Center Line - Desktop only */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border/30 -translate-x-1/2 hidden lg:block">
             <motion.div
               className="w-full bg-gradient-to-b from-cyan via-electric-blue to-indigo"
               style={{ height: lineHeight }}
@@ -214,9 +305,15 @@ export function Education() {
           </div>
 
           {/* Timeline Items */}
-          <div className="space-y-12 lg:space-y-24">
+          <div className="space-y-6 lg:space-y-16">
             {educationData.map((item, index) => (
-              <TimelineItem key={item.id} item={item} index={index} isInView={isInView} />
+              <TimelineItem
+                key={item.id}
+                item={item}
+                index={index}
+                isInView={isInView}
+                isLast={index === educationData.length - 1}
+              />
             ))}
           </div>
         </div>

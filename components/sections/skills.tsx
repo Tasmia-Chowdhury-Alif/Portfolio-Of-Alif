@@ -2,14 +2,13 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Server, Layout, Brain, Wrench, ChevronRight } from 'lucide-react'
+import { Server, Layout, Brain, Wrench, ChevronDown, Sparkles } from 'lucide-react'
 
 const skillCategories = [
   {
     id: 'backend',
     title: 'Backend Engineering',
     icon: Server,
-    color: 'cyan',
     gradient: 'from-cyan to-blue-500',
     skills: [
       { name: 'Django & DRF', level: 90 },
@@ -25,7 +24,6 @@ const skillCategories = [
     id: 'frontend',
     title: 'Frontend Development',
     icon: Layout,
-    color: 'electric-blue',
     gradient: 'from-electric-blue to-indigo',
     skills: [
       { name: 'React.js', level: 88 },
@@ -40,7 +38,6 @@ const skillCategories = [
     id: 'problem-solving',
     title: 'Problem Solving',
     icon: Brain,
-    color: 'indigo',
     gradient: 'from-indigo to-purple-500',
     skills: [
       { name: 'Data Structures', level: 88 },
@@ -54,7 +51,6 @@ const skillCategories = [
     id: 'tools',
     title: 'Dev Tools',
     icon: Wrench,
-    color: 'green',
     gradient: 'from-green-500 to-emerald-500',
     skills: [
       { name: 'Git & GitHub', level: 90 },
@@ -85,54 +81,54 @@ function SkillCard({
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group"
     >
       <motion.div
-        className="relative glass rounded-2xl border border-border/50 overflow-hidden cursor-pointer"
+        className="relative rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 overflow-hidden cursor-pointer hover:border-border transition-colors duration-300"
         onClick={onToggle}
-        whileHover={{ scale: 1.02 }}
         layout
       >
-        {/* Background gradient */}
+        {/* Background gradient on hover */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
         />
 
         {/* Header */}
-        <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="p-5 md:p-6 flex items-center justify-between">
+          <div className="flex items-center gap-3 md:gap-4">
             <motion.div
-              className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.gradient} flex items-center justify-center`}
-              whileHover={{ rotate: 5, scale: 1.1 }}
+              className={`w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${category.gradient} flex items-center justify-center shadow-lg`}
+              whileHover={{ rotate: 5, scale: 1.05 }}
             >
-              <Icon className="w-6 h-6 text-background" />
+              <Icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </motion.div>
             <div>
-              <h3 className="text-lg font-semibold">{category.title}</h3>
-              <p className="text-sm text-muted-foreground">{category.skills.length} skills</p>
+              <h3 className="text-base md:text-lg font-semibold">{category.title}</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">{category.skills.length} skills</p>
             </div>
           </div>
           <motion.div
-            animate={{ rotate: isExpanded ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center"
           >
-            <ChevronRight className="w-5 h-5 text-muted-foreground" />
+            <ChevronDown className="w-4 h-4 text-muted-foreground" />
           </motion.div>
         </div>
 
-        {/* Skills List */}
+        {/* Skills List - Expandable */}
         <AnimatePresence>
           {isExpanded && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
-              <div className="px-6 pb-6 space-y-4">
-                <div className="h-px bg-border/50" />
+              <div className="px-5 md:px-6 pb-5 md:pb-6 space-y-4">
+                <div className="h-px bg-gradient-to-r from-border/50 via-border to-border/50" />
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
@@ -145,12 +141,12 @@ function SkillCard({
                       <span className="font-medium">{skill.name}</span>
                       <span className="text-muted-foreground">{skill.level}%</span>
                     </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                    <div className="h-2 bg-secondary/50 rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full rounded-full bg-gradient-to-r ${category.gradient}`}
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 0.8, delay: skillIndex * 0.1 }}
+                        transition={{ duration: 0.8, delay: skillIndex * 0.08, ease: 'easeOut' }}
                       />
                     </div>
                   </motion.div>
@@ -167,20 +163,20 @@ function SkillCard({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="px-6 pb-6"
+              className="px-5 md:px-6 pb-5 md:pb-6"
             >
               <div className="flex flex-wrap gap-2">
-                {category.skills.slice(0, 4).map((skill) => (
+                {category.skills.slice(0, 3).map((skill) => (
                   <span
                     key={skill.name}
-                    className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${category.gradient} text-background`}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${category.gradient} text-white shadow-sm`}
                   >
                     {skill.name}
                   </span>
                 ))}
-                {category.skills.length > 4 && (
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
-                    +{category.skills.length - 4} more
+                {category.skills.length > 3 && (
+                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-secondary/50 text-muted-foreground border border-border/50">
+                    +{category.skills.length - 3} more
                   </span>
                 )}
               </div>
@@ -195,51 +191,56 @@ function SkillCard({
 export function Skills() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: '-100px' })
-  const [expandedId, setExpandedId] = useState<string | null>('backend')
+  // All dropdowns closed by default
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const handleToggle = (id: string) => {
     setExpandedId(expandedId === id ? null : id)
   }
 
   return (
-    <section id="skills" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="skills" className="relative py-24 md:py-32 overflow-hidden" ref={containerRef}>
       {/* Background */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <motion.div
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-blue/10 rounded-full blur-[150px]"
-        animate={{
-          x: [0, -50, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 grid-bg opacity-20" />
+        <motion.div
+          className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.65 0.22 260 / 0.08) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
           <motion.span
-            className="inline-block px-4 py-1.5 rounded-full glass text-sm font-medium text-indigo mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 text-sm font-medium text-indigo mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.1 }}
           >
+            <Sparkles className="w-3 h-3" />
             Skills
           </motion.span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             My <span className="gradient-text">Expertise</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
             Specialized skills honed through real-world projects and continuous learning
           </p>
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
           {skillCategories.map((category, index) => (
             <SkillCard
               key={category.id}
