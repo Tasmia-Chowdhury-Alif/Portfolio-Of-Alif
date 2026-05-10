@@ -60,7 +60,7 @@ export function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[100svh] lg:min-h-[90vh] xl:min-h-[85vh] 2xl:min-h-[80vh] flex items-center justify-center overflow-hidden pt-20 pb-24 md:pb-16"
+      className="relative min-h-[100svh] lg:min-h-[100vh] xl:min-h-[100vh] 2xl:min-h-[100vh] flex items-center justify-center overflow-hidden pt-20 pb-24 md:pb-16"
     >
       {/* Animated Background Effects */}
       <div className="absolute inset-0">
