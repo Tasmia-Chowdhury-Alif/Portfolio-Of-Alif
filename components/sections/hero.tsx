@@ -9,12 +9,12 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com/Tasmia-Chowdhury-Alif', label: 'GitHub', color: 'hover:text-foreground hover:border-foreground' },
-  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/tasmia-chy-alif/', label: 'LinkedIn', color: 'hover:text-blue-500 hover:border-blue-500' },
-  { icon: Mail, href: 'mailto:tasmiachowdhuryalif222@gamil.com', label: 'Email', color: 'hover:text-red-400 hover:border-red-400' },
-  { icon: SiLeetcode, href: 'https://leetcode.com/u/tasmiachowdhuryalif222/', label: 'LeetCode', color: 'hover:text-yellow-500 hover:border-yellow-500' },
-  { icon: SiCodeforces, href: 'https://codeforces.com/profile/alif_222', label: 'Codeforces', color: 'hover:text-blue-400 hover:border-blue-400' },
-  { icon: SiCodechef, href: 'https://www.codechef.com/users/alif_222', label: 'CodeChef', color: 'hover:text-amber-600 hover:border-amber-600' },
+  { icon: FaGithub, href: 'https://github.com/Tasmia-Chowdhury-Alif', label: 'GitHub', color: 'hover:text-foreground' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/tasmia-chy-alif/', label: 'LinkedIn', color: 'hover:text-blue-500' },
+  { icon: Mail, href: 'mailto:tasmiachowdhuryalif222@gmail.com', label: 'Email', color: 'hover:text-red-400' },
+  { icon: SiLeetcode, href: 'https://leetcode.com/u/tasmiachowdhuryalif222/', label: 'LeetCode', color: 'hover:text-yellow-500' },
+  { icon: SiCodeforces, href: 'https://codeforces.com/profile/alif_222', label: 'Codeforces', color: 'hover:text-blue-400' },
+  { icon: SiCodechef, href: 'https://www.codechef.com/users/alif_222', label: 'CodeChef', color: 'hover:text-amber-600' },
 ]
 
 const floatingStats = [
@@ -217,12 +217,12 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-3 md:space-y-4"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl font-bold leading-tight">
                 <span className="text-foreground">Backend-Focused</span>
                 <br />
                 <span className="gradient-text">Fullstack Developer</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
                 Building Scalable & Intelligent Web Systems with{' '}
                 <span className="text-cyan font-medium">Django</span>,{' '}
                 <span className="text-electric-blue font-medium">React</span>, and{' '}
