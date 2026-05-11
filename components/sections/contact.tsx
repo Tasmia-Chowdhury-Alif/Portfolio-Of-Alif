@@ -9,11 +9,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com', label: 'GitHub', color: '#333' },
-  { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: '#0A66C2' },
-  { icon: SiLeetcode, href: 'https://leetcode.com', label: 'LeetCode', color: '#FFA116' },
-  { icon: SiCodeforces, href: 'https://codeforces.com', label: 'Codeforces', color: '#1F8ACB' },
-  { icon: SiCodechef, href: 'https://codechef.com', label: 'CodeChef', color: '#5B4638' },
+  { icon: FaGithub, href: 'https://github.com/Tasmia-Chowdhury-Alif', label: 'GitHub', color: 'hover:text-foreground' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/tasmia-chy-alif/', label: 'LinkedIn', color: 'hover:text-blue-500' },
+  { icon: Mail, href: 'mailto:tasmiachowdhuryalif222@gmail.com', label: 'Email', color: 'hover:text-red-400' },
+  { icon: SiLeetcode, href: 'https://leetcode.com/u/tasmiachowdhuryalif222/', label: 'LeetCode', color: 'hover:text-yellow-500' },
+  { icon: SiCodeforces, href: 'https://codeforces.com/profile/alif_222', label: 'Codeforces', color: 'hover:text-blue-400' },
+  { icon: SiCodechef, href: 'https://www.codechef.com/users/alif_222', label: 'CodeChef', color: 'hover:text-amber-600' },
 ]
 
 const contactInfo = [
@@ -195,20 +196,37 @@ export function Contact() {
               <div className="flex flex-wrap gap-2">
                 {socialLinks.map((social, index) => (
                   <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-secondary/30 text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-secondary/50"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.5 + index * 0.05 }}
-                    style={{ '--hover-color': social.color } as React.CSSProperties}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+                    group relative
+                    p-3 rounded-xl
+                    bg-secondary/30
+                    border border-border/40
+                    text-muted-foreground
+                    backdrop-blur-sm
+
+                    hover:-translate-y-1
+                    hover:scale-105
+                    hover:bg-secondary/60
+                    hover:shadow-lg
+
+                    transition-all duration-300
+
+                    ${social.color}
+                  `}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 0.5 + index * 0.05 }}
+                  aria-label={social.label}
+                >
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-white/5 to-transparent" />
+
+                  <social.icon className="relative w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                   </motion.a>
                 ))}
               </div>
