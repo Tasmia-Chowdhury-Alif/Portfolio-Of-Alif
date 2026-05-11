@@ -197,6 +197,13 @@
   background-size: 50px 50px;
 }
 
+.bg-grid {
+  background-image: 
+    linear-gradient(to right, oklch(0.5 0.1 260 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.5 0.1 260 / 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
 /* Noise overlay */
 .noise {
   position: relative;

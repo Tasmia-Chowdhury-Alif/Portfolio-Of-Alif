@@ -14,17 +14,27 @@ import {
   SiTailwindcss,
   SiNodedotjs,
   SiMongodb,
+  SiHtml5,
+  SiRender,
+  SiGmail,
+  SiSupabase,
+  SiVercel,
+  SiBootstrap,
+  SiJavascript,
 } from 'react-icons/si'
+import { TbShieldLock } from "react-icons/tb";
+import { FcGoogle } from "react-icons/fc";
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-const projects = [
+
+export const projects = [
   {
     id: 1,
     title: 'Driver Safety Monitoring System',
-    subtitle: 'AI SaaS Platform',
-    description:
-      'Real-time driver monitoring SaaS platform that detects drowsiness and distracted driving situations using AI-based detection and scalable backend architecture.',
+    subtitle: 'SaaS Platform',
+    description: 'Real-time driver monitoring SaaS platform that detects drowsiness and distracted driving situations using AI-based detection and scalable backend architecture.',
+    longDescription: 'A comprehensive driver safety solution designed to reduce road accidents caused by driver fatigue and distraction. The platform uses advanced computer vision and machine learning to monitor driver behavior in real-time, providing instant alerts when dangerous situations are detected.',
     features: [
       'TensorFlow.js detection',
       'Real-time alerts',
@@ -33,27 +43,50 @@ const projects = [
       'Stripe subscription',
       'Scalable backend',
     ],
+    longFeatures: [
+      'Real-time drowsiness detection using TensorFlow.js',
+      'Distracted driving alerts with computer vision',
+      'Email and SMS notification system',
+      'GPS location sharing with emergency contacts',
+      'Stripe-powered subscription management',
+      'Admin dashboard for fleet management',
+      'Historical data analytics and reports',
+      'Multi-tenant SaaS architecture',
+    ],
     tech: [
       { icon: SiReact, name: 'React', color: '#61DAFB' },
       { icon: SiDjango, name: 'Django', color: '#092E20' },
       { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
       { icon: SiStripe, name: 'Stripe', color: '#635BFF' },
       { icon: SiTensorflow, name: 'TensorFlow.js', color: '#FF6F00' },
+      { icon: SiSupabase, name: 'Supabase', color: '#3ECF8E' },
+      { icon: SiVercel, name: 'Vercel', color: '#000000' },
     ],
     gradient: 'from-cyan via-blue-500 to-indigo',
-    image: '/images/projects/driver-safety.png',
-    links: {
-      live: '#',
-      github: '#',
-      docs: '#',
-    },
+    image: 'https://res.cloudinary.com/dlhx7zvg3/image/upload/v1778503239/driver-safety_h24svt.png',
+    links: { live: 'https://safe-driving-nine.vercel.app/', github: 'https://github.com/Tasmia-Chowdhury-Alif/Driver-Safety-Monitoring-System', docs: 'https://driver-safety-monitoring-system.vercel.app/api/docs' },
+    challenges: [
+      'Optimizing TensorFlow.js model for real-time performance in browser',
+      'Building a scalable WebSocket infrastructure for live updates',
+      'Implementing secure multi-tenant data isolation',
+      'Handling high-frequency sensor data efficiently',
+    ],
+    futureImprovements: [
+      'Mobile app with native camera integration',
+      'Advanced analytics with ML-powered insights',
+      'Integration with vehicle OBD systems',
+      'Voice-activated emergency assistance',
+    ],
+    timeline: '3 months (Research + Dev)',
+    teamSize: 'Team Of 2',
+    status: 'Live',
   },
   {
     id: 2,
     title: 'Green Harvest',
     subtitle: 'E-commerce Platform',
-    description:
-      'Scalable grocery e-commerce backend system with authentication, order processing, caching, and multi-payment integration.',
+    description: 'Scalable grocery e-commerce backend system with authentication, order processing, caching, and multi-payment integration.',
+    longDescription: 'A full-featured e-commerce platform designed specifically for grocery and fresh produce delivery. The system handles complex inventory management, delivery scheduling, and supports multiple payment gateways for a seamless checkout experience.',
     features: [
       'JWT authentication',
       'Djoser auth system',
@@ -62,124 +95,248 @@ const projects = [
       'SSLCommerz integration',
       'Product filtering',
     ],
+    longFeatures: [
+      'JWT-based authentication with refresh tokens',
+      'Djoser integration for user management',
+      'Redis caching for improved performance',
+      'Stripe payment integration',
+      'SSLCommerz for local payments',
+      'Advanced product filtering and search',
+      'Shopping cart and wishlist functionality',
+      'Order tracking and delivery management',
+    ],
     tech: [
+      { icon: SiReact, name: 'React', color: '#61DAFB' },
       { icon: SiDjango, name: 'Django', color: '#092E20' },
       { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
       { icon: SiRedis, name: 'Redis', color: '#DC382D' },
       { icon: SiStripe, name: 'Stripe', color: '#635BFF' },
+      { icon: SiSupabase, name: 'Supabase', color: '#3ECF8E' },
+      { icon: SiVercel, name: 'Vercel', color: '#000000' },
     ],
     gradient: 'from-green-500 via-emerald-500 to-teal-500',
-    image: '/images/projects/green-harvest.jpg',
-    links: {
-      live: '#',
-      github: '#',
-      docs: '#',
-    },
+    image: 'https://res.cloudinary.com/dlhx7zvg3/image/upload/v1778505107/green-harvest_dcuzld.png',
+    links: { live: 'https://green-harvest-seven.vercel.app/', github: 'https://github.com/Tasmia-Chowdhury-Alif/Green-Harvest-Backend', docs: 'https://green-harvest-backend-seven.vercel.app/api/docs' },
+    challenges: [
+      'Managing real-time inventory across multiple warehouses',
+      'Implementing efficient delivery slot algorithms',
+      'Handling payment gateway failures gracefully',
+      'Optimizing database queries for product searches',
+    ],
+    futureImprovements: [
+      'AI-powered product recommendations',
+      'Voice ordering integration',
+      'Subscription-based recurring orders',
+      'Carbon footprint tracking for deliveries',
+    ],
+    timeline: '1 months',
+    teamSize: 'Team of 2',
+    status: 'Live',
   },
   {
     id: 3,
-    title: 'Portfolio Website',
-    subtitle: 'Personal Showcase',
-    description:
-      'Modern, animated portfolio website built with Next.js and Tailwind CSS featuring smooth animations, dark mode, and responsive design.',
+    title: 'BookPilot',
+    subtitle: 'Library Management System',
+    description: 'A Full-stack Django application for efficient library management with a responsive frontend and secure transaction logic.',
+    longDescription: 'BookPilot is a full-stack Django application designed to streamline library management with a user-friendly, responsive interface. This project demonstrates proficiency in building secure, scalable web applications featuring robust backend logic, polished frontend design, and seamless database integration. Deployed on Render, it highlights the ability to deliver production-ready solutions using modern web standards.',
     features: [
-      'Framer Motion animations',
-      'GSAP scroll effects',
-      'Dark/Light mode',
-      'Responsive design',
-      'Custom cursor',
-      'Smooth scrolling',
+      'One-Click Borrowing',
+      'User Dashboard',
+      'Review & Ratings',
+      'Category Filters',
+      'Email Notifications',
+      'Secure Transactions',
     ],
-    tech: [
-      { icon: SiNextdotjs, name: 'Next.js', color: '#000000' },
-      { icon: SiReact, name: 'React', color: '#61DAFB' },
-      { icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4' },
-    ],
-    gradient: 'from-electric-blue via-indigo to-purple-500',
-    image: '/images/projects/portfolio.jpg',
-    links: {
-      live: '#',
-      github: '#',
-    },
-  },
-  {
-    id: 4,
-    title: 'Task Management API',
-    subtitle: 'Backend Service',
-    description:
-      'RESTful API for task management with user authentication, team collaboration, real-time notifications, and comprehensive documentation.',
-    features: [
-      'REST API Design',
-      'OAuth2 Authentication',
-      'Team Workspaces',
-      'Real-time WebSockets',
-      'API Documentation',
-      'Rate Limiting',
+    longFeatures: [
+      'One-Click Book Borrowing & Returns with real-time balance updates',
+      'Personal User Dashboard to track history and deposit funds',
+      'Restricted Review & Rating system (borrowers only)',
+      'Dynamic Category Filters with sleek, mobile-friendly UI',
+      'Gmail SMTP integration for instant HTML email alerts',
+      'Atomic transactions for concurrency safety in financial operations',
+      'PostgreSQL database hosted on Supabase',
+      'Responsive layouts with Tailwind CSS and gradient themes',
     ],
     tech: [
       { icon: SiDjango, name: 'Django', color: '#092E20' },
       { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
-      { icon: SiRedis, name: 'Redis', color: '#DC382D' },
+      { icon: SiTailwindcss, name: 'Tailwind CSS', color: '#06B6D4' },
+      { icon: SiHtml5, name: 'HTML5', color: '#E34F26' },
+      { icon: SiSupabase, name: 'Supabase', color: '#3ECF8E' },
+      { icon: SiGmail, name: 'Gmail SMTP', color: '#EA4335' },
+      { icon: SiRender, name: 'Render', color: '#46E3B7' },
     ],
-    gradient: 'from-orange-500 via-red-500 to-pink-500',
-    image: '/images/projects/task-api.jpg',
-    links: {
-      github: '#',
-      docs: '#',
+    gradient: 'from-blue-600 via-indigo-600 to-purple-600',
+    image: 'https://res.cloudinary.com/dlhx7zvg3/image/upload/v1778515497/book-pilot_npwab6.png',
+    links: { 
+      live: 'https://bookpilot-library-management.onrender.com', 
+      github: 'https://github.com/Tasmia-Chowdhury-Alif/BookPilot-Library_Management', 
     },
+    challenges: [
+      'Ensuring data integrity during concurrent borrow/return transactions',
+      'Configuring SMTP for reliable HTML-based email notifications',
+      'Integrating PostgreSQL with Supabase while maintaining deployment stability on Render',
+      'Creating a seamless UX for real-time balance and inventory updates',
+    ],
+    futureImprovements: [
+      'Advanced search with autocomplete functionality',
+      'SMS alerts for overdue book reminders',
+      'Digital E-book reader integration',
+      'Multi-librarian role-based access control (RBAC)',
+    ],
+    timeline: '1 week',
+    teamSize: 'Solo Developer',
+    status: 'Live',
+  },
+  {
+    id: 4,
+    title: 'DocEra Health Care',
+    subtitle: 'Hospital Management System',
+    description: 'A secure healthcare API and frontend system for appointments, doctor management, and integrated payments.',
+    longDescription: 'DocEra Health Care is a high-performance hospital management ecosystem powered by a secure Django REST Framework backend and a dynamic, responsive Bootstrap frontend. It features a complete ecosystem for patients to book appointments, doctors to manage profiles, and administrators to oversee operations. The system emphasizes security with JWT authentication and financial reliability through automated Stripe payment and refund handling.',
+    features: [
+      'JWT Authentication',
+      'Stripe Payment Gateway',
+      'Doctor Review System',
+      'Appointment Scheduling',
+      'Email Notifications',
+      'Interactive API Docs',
+    ],
+    longFeatures: [
+      'Role-based access control for Patients, Doctors, and Admins',
+      'Secure Stripe integration for online fee payments and automated refunds',
+      'Smart appointment cancellation logic with a 24-hour refund window',
+      'Comprehensive Doctor profiles with specializations, fees, and ratings',
+      'Automated email alerts for account activation and booking confirmations',
+      'Jazzmin-powered custom admin dashboard with CKEditor5 integration',
+      'Data isolation ensuring patients only access their personal records',
+      'Live API documentation via Swagger UI and Redoc (OpenAPI 3.0)',
+    ],
+    tech: [
+      { icon: SiDjango, name: 'Django DRF', color: '#092E20' },
+      { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
+      { icon: SiBootstrap, name: 'Bootstrap 5', color: '#7952B3' },
+      { icon: SiJavascript, name: 'JavaScript', color: '#F7DF1E' },
+      { icon: SiStripe, name: 'Stripe', color: '#008CDD' },
+      { icon: SiVercel, name: 'Vercel', color: '#000000' },
+    ],
+    gradient: 'from-blue-600 via-sky-500 to-indigo-500',
+    image: 'https://res.cloudinary.com/dlhx7zvg3/image/upload/v1778516212/DocEra_xss4bh.png',
+    links: { 
+      live: 'https://tasmia-chowdhury-alif.github.io/Smart-Care-Hospital-Frontend/', 
+      github: 'https://github.com/Tasmia-Chowdhury-Alif/DocEra_Health_Care',
+      docs: 'https://docera-health-care.vercel.app/api/swagger/' 
+    },
+    challenges: [
+      'Implementing Stripe webhooks for secure payment and refund verification',
+      'Managing complex appointment concurrency and data isolation between roles',
+      'Customizing the Jazzmin admin interface for a streamlined medical workflow',
+      'Optimizing API performance using Django Debug Toolbar insights',
+    ],
+    futureImprovements: [
+      'Telemedicine video consultation integration',
+      'Automated prescription generation in PDF format',
+      'Integration with laboratory and pharmacy inventory systems',
+      'AI-based doctor availability prediction',
+    ],
+    timeline: '1.5 months',
+    teamSize: 'Solo Developer',
+    status: 'Live',
   },
   {
     id: 5,
-    title: 'Real-time Chat Application',
-    subtitle: 'Full Stack App',
-    description:
-      'Modern chat application with real-time messaging, file sharing, group chats, and end-to-end encryption for secure communications.',
+    title: 'Learnhub',
+    subtitle: 'Course Management Platform',
+    description: 'A full-stack Next.js application for educational platform with secure authentication, course management, and a polished responsive UI.',
+    longDescription: 'Learnhub is a comprehensive course management application built with Next.js and MongoDB. It features a robust authentication system using NextAuth.js, allowing users to browse courses publicly while restricting management features to authorized users. The platform emphasizes a clean user experience with Shadcn UI components, real-time form validation with Zod, and seamless data persistence.',
     features: [
-      'WebSocket messaging',
-      'File attachments',
-      'Group chats',
-      'Message encryption',
-      'Read receipts',
-      'Online status',
+      'NextAuth Authentication',
+      'Course CRUD Operations',
+      'Dynamic Search & Filtering',
+      'Responsive Dashboard',
+      'Toast Notifications',
+      'Social Login (Google)',
     ],
-    tech: [
-      { icon: SiReact, name: 'React', color: '#61DAFB' },
-      { icon: SiNodedotjs, name: 'Node.js', color: '#339933' },
-      { icon: SiMongodb, name: 'MongoDB', color: '#47A248' },
-    ],
-    gradient: 'from-purple-500 via-violet-500 to-indigo',
-    image: '/images/projects/chat-app.jpg',
-    links: {
-      live: '#',
-      github: '#',
-    },
-  },
-  {
-    id: 6,
-    title: 'Analytics Dashboard',
-    subtitle: 'Data Visualization',
-    description:
-      'Comprehensive analytics dashboard with real-time data visualization, custom reports, and export functionality for business intelligence.',
-    features: [
-      'Real-time charts',
-      'Custom reports',
-      'Data export',
-      'User tracking',
-      'Performance metrics',
-      'Email reports',
+    longFeatures: [
+      'Secure Authentication using NextAuth.js with Credentials and Google providers',
+      'Protected routes for adding and managing courses',
+      'Dynamic course listing with search and category filtering logic',
+      'Interactive User Dashboard with dropdown navigation and profile info',
+      'Fully responsive UI built with Tailwind CSS and Shadcn/UI components',
+      'Form handling and validation using React Hook Form and Zod',
+      'Real-time feedback via Sonner toast notifications',
+      'Persistent storage using MongoDB and Mongoose ODM',
     ],
     tech: [
       { icon: SiNextdotjs, name: 'Next.js', color: '#000000' },
-      { icon: SiReact, name: 'React', color: '#61DAFB' },
-      { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
+      { icon: SiMongodb, name: 'MongoDB', color: '#47A248' },
+      { icon: SiTailwindcss, name: 'Tailwind CSS', color: '#06B6D4' }, 
+      { icon: TbShieldLock, name: 'NextAuth.js', color: '#61DAFB' },
+      { icon: FcGoogle, name: 'Google Auth', color: '#4285F4' },
+      { icon: SiVercel, name: 'Vercel', color: '#000000' },
     ],
-    gradient: 'from-yellow-500 via-orange-500 to-red-500',
-    image: '/images/projects/analytics.jpg',
-    links: {
-      live: '#',
-      github: '#',
+    gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+    image: 'https://res.cloudinary.com/dlhx7zvg3/image/upload/v1778510670/learnhub_dszmea.png',
+    links: { 
+      live: 'https://learn-hub-rho-two.vercel.app/', 
+      github: 'https://github.com/Tasmia-Chowdhury-Alif/LearnHub' 
     },
+    challenges: [
+      'Implementing secure route protection and session management',
+      'Synchronizing server-side data fetching with client-side UI states',
+      'Creating a consistent and accessible UI using custom Radix-based components',
+      'Optimizing MongoDB queries for efficient course searching',
+    ],
+    futureImprovements: [
+      'Video streaming integration for lessons',
+      'Stripe payment gateway for premium courses',
+      'Student progress tracking and certification',
+      'Interactive quiz system for each module',
+    ],
+    timeline: '4 Days',
+    teamSize: 'Solo Developer',
+    status: 'Live',
   },
+  // {
+  //   id: 6,
+  //   title: 'Analytics Dashboard',
+  //   subtitle: 'Data Visualization',
+  //   description: 'Comprehensive analytics dashboard with real-time data visualization, custom reports, and export functionality for business intelligence.',
+  //   longDescription: 'A powerful analytics platform providing real-time insights into business metrics. Features customizable dashboards, automated reporting, and advanced data visualization tools for data-driven decision making.',
+  //   longFeatures: [
+  //     'Real-time data charts',
+  //     'Customizable dashboards',
+  //     'Report generation',
+  //     'Data export (CSV, PDF)',
+  //     'User behavior tracking',
+  //     'Performance metrics',
+  //     'Automated email reports',
+  //     'Role-based access control',
+  //   ],
+  //   tech: [
+  //     { icon: SiNextdotjs, name: 'Next.js', color: '#000000' },
+  //     { icon: SiReact, name: 'React', color: '#61DAFB' },
+  //     { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
+  //   ],
+  //   gradient: 'from-yellow-500 via-orange-500 to-red-500',
+  //   image: '/images/projects/analytics.jpg',
+  //   links: { live: '#', github: '#' },
+  //   challenges: [
+  //     'Handling large datasets efficiently',
+  //     'Building responsive chart components',
+  //     'Implementing real-time data updates',
+  //     'Optimizing query performance',
+  //   ],
+  //   futureImprovements: [
+  //     'AI-powered insights',
+  //     'Predictive analytics',
+  //     'Custom widget builder',
+  //     'Mobile app',
+  //   ],
+  //   timeline: '5 months',
+  //   teamSize: 'Solo Developer',
+  //   status: 'Live',
+  // },
 ]
 
 const ITEMS_PER_PAGE = 3
@@ -206,7 +363,17 @@ function ProjectCard({
     >
       <div className="relative h-full rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 overflow-hidden hover:border-border transition-all duration-300">
         {/* Header Image Area with gradient */}
-        <div className={`relative h-44 md:h-48 bg-gradient-to-br ${project.gradient} p-5 overflow-hidden`}>
+        <div className={`relative object-cover h-50 md:h-52 bg-gradient-to-br ${project.image ? "" : project.gradient} p-5 overflow-hidden`}>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
+          />
+
+          {/* Dark overlay to keep text readable */}
+          {/* <div className="absolute inset-0 bg-black/40" /> */}
+
+
           {/* Animated gradient overlay */}
           <motion.div
             className="absolute inset-0 opacity-30"
@@ -288,36 +455,159 @@ function ProjectCard({
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap gap-2 pt-2 mt-auto">
-            {project.links.live && (
-              <Button size="sm" variant="outline" className="gap-1.5 h-8 text-xs" asChild>
-                <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-3 h-3" />
-                  Live Demo
-                </a>
-              </Button>
-            )}
-            {project.links.github && (
-              <Button size="sm" variant="ghost" className="gap-1.5 h-8 text-xs" asChild>
-                <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-3 h-3" />
-                  Code
-                </a>
-              </Button>
-            )}
-            {project.links.docs && (
-              <Button size="sm" variant="ghost" className="gap-1.5 h-8 text-xs" asChild>
-                <a href={project.links.docs} target="_blank" rel="noopener noreferrer">
-                  <FileCode className="w-3 h-3" />
-                  Docs
-                </a>
-              </Button>
-            )}
-            <Link href={`/projects/${project.id}`} className="ml-auto">
-              <Button size="sm" variant="ghost" className="gap-1.5 h-8 text-xs text-cyan hover:text-cyan">
-                <Eye className="w-3 h-3" />
-                Details
-              </Button>
+          <div className="mt-auto pt-3 space-y-3">
+
+            {/* Top Action Buttons */}
+            <div className="flex flex-wrap gap-2">
+              {project.links.live && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="
+                    group h-8 px-3 text-[11px]
+                    rounded-full
+                    border-border/60
+                    bg-background/80
+                    text-foreground
+                    backdrop-blur-sm
+
+                    hover:-translate-y-0.5
+                    hover:scale-[1.03]
+                    hover:bg-cyan/10
+                    hover:border-cyan/40
+                    hover:shadow-lg hover:shadow-cyan/10
+
+                    hover:text-foreground
+                    dark:hover:text-white
+
+                    active:scale-[0.98]
+
+                    transition-all duration-300
+                  "
+                  asChild
+                >
+                  <a href={project.links.live} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="w-3 h-3 mr-1.5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+                    Live Demo
+                  </a>
+                </Button>
+              )}
+
+              {project.links.github && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="
+                    group h-8 px-3 text-[11px]
+                    rounded-full
+                    bg-transparent
+                    text-foreground
+
+                    hover:-translate-y-0.5
+                    hover:scale-[1.03]
+                    hover:bg-secondary/80
+                    hover:shadow-md
+
+                    hover:text-foreground
+                    dark:hover:text-white
+
+                    active:scale-[0.98]
+
+                    transition-all duration-300
+                  "
+                  asChild
+                >
+                  <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                    <Github className="w-3 h-3 mr-1.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" />
+                    Code
+                  </a>
+                </Button>
+              )}
+
+              {project.links.docs && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="
+                    group h-8 px-3 text-[11px]
+                    rounded-full
+                    bg-transparent
+                    text-foreground
+
+                    hover:-translate-y-0.5
+                    hover:scale-[1.03]
+                    hover:bg-secondary/80
+                    hover:shadow-md
+
+                    hover:text-foreground
+                    dark:hover:text-white
+
+                    active:scale-[0.98]
+
+                    transition-all duration-300
+                  "
+                  asChild
+                >
+                  <a href={project.links.docs} target="_blank" rel="noopener noreferrer">
+                    <FileCode className="w-3 h-3 mr-1.5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" />
+                    API Docs
+                  </a>
+                </Button>
+              )}
+            </div>
+
+            {/* Modern Details Button */}
+            <Link href={`/projects/${project.id}`} className="block">
+              <motion.div
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="
+                  group/details
+                  relative overflow-hidden
+                  rounded-2xl
+                  border border-border/60
+                  bg-gradient-to-r
+                  from-cyan/5
+                  via-electric-blue/5
+                  to-indigo/5
+                  hover:border-cyan/40
+                  transition-all duration-300
+                "
+              >
+                {/* Animated Glow */}
+                <div className="absolute inset-0 opacity-0 group-hover/details:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan/10 via-electric-blue/10 to-indigo/10" />
+                </div>
+
+                <div className="relative flex items-center justify-between px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="
+                        flex items-center justify-center
+                        w-9 h-9 rounded-xl
+                        bg-cyan/10
+                        border border-cyan/20
+                        group-hover/details:scale-110
+                        transition-transform duration-300
+                      "
+                    >
+                      <ArrowRight className="w-4 h-4 text-cyan" />
+                    </div>
+
+                    <p className="text-sm font-semibold">
+                      View Project Details
+                    </p>
+                  </div>
+
+                  <ArrowRight
+                    className="
+                      w-4 h-4 text-cyan
+                      group-hover/details:translate-x-1
+                      transition-transform duration-300
+                    "
+                  />
+                </div>
+              </motion.div>
             </Link>
           </div>
         </div>
