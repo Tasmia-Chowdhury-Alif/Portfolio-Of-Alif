@@ -217,7 +217,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-3 md:space-y-4"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl font-bold leading-tight ">
                 <span className="text-foreground">Backend-Focused</span>
                 <br />
                 <span className="gradient-text">Fullstack Developer</span>
