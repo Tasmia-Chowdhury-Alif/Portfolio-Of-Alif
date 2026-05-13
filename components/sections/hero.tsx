@@ -256,7 +256,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="group hover:text-cyan-400 hover:border-cyan/50 hover:bg-cyan/5 hover:shadow-lg hover:shadow-cyan/25 hover:shadow-cyan/40 transition-shadow"
+                className="group hover:text-cyan-400 border hover:border-cyan-400 bg-transparent/50 hover:bg-transparent hover:shadow-2xl hover:shadow-cyan/40 transition-shadow"
                 asChild
               >
                 <a href="#projects">

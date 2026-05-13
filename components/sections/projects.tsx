@@ -498,25 +498,25 @@ function ProjectCard({
                   size="sm"
                   variant="ghost"
                   className="
-                    group h-8 px-3 text-[11px]
-                    rounded-full
-                    bg-transparent
+                    group 
+                    h-8 px-3 text-[11px]
+                    border-none
+                    shadow
+                  bg-transparent/50
+                  hover:bg-transparent/50
+                  dark:hover:bg-transparent/50
+
                     text-foreground
-
                     hover:text-foreground
-                    dark:hover:text-white
 
-                    active:scale-[0.98]
-
-                    transition-all duration-300
-
+                    backdrop-blur-md
+                    hover:shadow-md 
+                    hover:shadow-cyan/40
+                    
                     hover:-translate-y-0.5
                     hover:scale-[1.03]
-                    hover:bg-cyan/40
-                    hover:border-cyan/40
-                    hover:shadow-lg hover:shadow-cyan/25
 
-                    hover:bg-linear-to-r from-cyan to-electric-blue font-semibold
+                    transition-all duration-300
                   "
                   asChild
                 >
@@ -532,27 +532,25 @@ function ProjectCard({
                   size="sm"
                   variant="ghost"
                   className="
-                    group h-8 px-3 text-[11px]
-                    rounded-full
-                    bg-transparent
-                    text-foreground
+                    group 
+                    h-8 px-3 text-[11px]
+                    border-none
+                    shadow
+                  bg-transparent/50
+                  hover:bg-transparent/50
+                  dark:hover:bg-transparent/50
 
+                    text-foreground
+                    hover:text-foreground
+
+                    backdrop-blur-md
+                    hover:shadow-md 
+                    hover:shadow-cyan/40
+                    
                     hover:-translate-y-0.5
                     hover:scale-[1.03]
 
-                    hover:text-foreground
-                    dark:hover:text-white
-
-                    active:scale-[0.98]
-
                     transition-all duration-300
-
-                    hover:bg-cyan/40
-                    hover:border-cyan/40
-                    hover:shadow-lg hover:shadow-cyan/25
-
-                    hover:bg-linear-to-r from-cyan to-electric-blue font-semibold
-                    
                   "
                   asChild
                 >

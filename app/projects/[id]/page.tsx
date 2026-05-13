@@ -103,8 +103,11 @@ export default function ProjectDetailPage() {
                     size="sm"
                     className="
                       h-10 px-5 rounded-full
-                      bg-white text-black
+                      bg-white 
+                      text-black
+                      hover:text-white
                       hover:opacity-90
+                      hover:bg-linear-to-r from-cyan to-electric-blue font-semibold
                       transition-all duration-300
                       shadow-md
                       group
@@ -125,12 +128,16 @@ export default function ProjectDetailPage() {
                     variant="outline"
                     className="
                       h-10 px-5 rounded-full
-                      border-border
-                      bg-background/60
+                      border-none
+                      shadow-white
+                      bg-transparent/50
+                      hover:bg-transparent/50
                       text-white
-                      hover:bg-accent
-                      hover:text-foreground dark:hover:text-white
+                      hover:text-white
+                      dark:hover:text-white
                       backdrop-blur-md
+                      hover:shadow-md 
+                      hover:shadow-cyan/40
                       transition-all duration-300
                       group
                     "
@@ -149,15 +156,19 @@ export default function ProjectDetailPage() {
                     size="sm"
                     variant="outline"
                     className="
-                      h-10 px-5 rounded-full
-                      border-border
-                      bg-background/60
-                      text-foreground
-                      hover:bg-accent
-                      hover:text-foreground dark:hover:text-white
-                      backdrop-blur-md
-                      transition-all duration-300
                       group
+                      h-10 px-5 rounded-full
+                      border-none
+                      shadow-white
+                    bg-transparent/50
+                    hover:bg-transparent/50
+                    text-white
+                    hover:text-white
+                    dark:hover:text-white
+                      backdrop-blur-md
+                      hover:shadow-md 
+                      hover:shadow-cyan/40
+                      transition-all duration-300
                     "
                     asChild
                   >
