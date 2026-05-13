@@ -9,6 +9,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Navbar } from '@/components/sections/navbar'
 import { Footer } from '@/components/sections/footer'
+import { SmoothScroll } from '@/components/smooth-scroll'
+import { CustomCursor } from '@/components/custom-cursor'
+import { ScrollProgress } from '@/components/scroll-progress'
 
 
 export default function ProjectDetailPage() {
@@ -34,7 +37,6 @@ export default function ProjectDetailPage() {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen bg-background">
         {/* HERO SECTION */}
         <section className="relative h-screen min-h-[620px] flex items-center overflow-hidden">
@@ -101,7 +103,7 @@ export default function ProjectDetailPage() {
                     size="sm"
                     className="
                       h-10 px-5 rounded-full
-                      bg-foreground text-background
+                      bg-white text-black
                       hover:opacity-90
                       transition-all duration-300
                       shadow-md
@@ -125,7 +127,7 @@ export default function ProjectDetailPage() {
                       h-10 px-5 rounded-full
                       border-border
                       bg-background/60
-                      text-foreground
+                      text-white
                       hover:bg-accent
                       hover:text-foreground dark:hover:text-white
                       backdrop-blur-md
@@ -320,7 +322,6 @@ export default function ProjectDetailPage() {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   )
 }

@@ -175,10 +175,10 @@ export function Footer() {
               </h4>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <a
-                  href="mailto:contact@tasmia.dev"
+                  href="mailto:tasmiachowdhuryalif222@gmail.com"
                   className="block hover:text-cyan transition-colors"
                 >
-                  contact@tasmia.dev
+                  tasmiachowdhuryalif222@gmail.com
                 </a>
                 <p>Chittagong, Bangladesh</p>
               </div>

@@ -21,8 +21,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@tasmia.dev',
-    href: 'mailto:contact@tasmia.dev',
+    value: 'tasmiachowdhuryalif222@gmail.com',
+    href: 'mailto:tasmiachowdhuryalif222@gmail.com',
     gradient: 'from-red-500 to-pink-500',
   },
   {
@@ -270,7 +270,7 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder="your@email.com"
                       required
-                      className="bg-secondary/30 border-border/50 focus:border-cyan/50 focus:ring-cyan/20 transition-all"
+                      className="overflow-hidden bg-secondary/30 border-border/50 focus:border-cyan/50 focus:ring-cyan/20 transition-all"
                     />
                   </div>
                 </div>

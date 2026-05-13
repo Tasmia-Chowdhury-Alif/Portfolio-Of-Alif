@@ -16,22 +16,15 @@ import { Footer } from '@/components/sections/footer'
 
 export default function Home() {
   return (
-    <SmoothScroll>
-      <PageLoader />
-      <CustomCursor />
-      <ScrollProgress />
+    <>
+      <Hero />
+      <About />
+      <TechStack />
+      <Skills />
+      <Education />
+      <Projects />
+      <Contact />
       
-      <main className="relative overflow-hidden">
-        <Navbar />
-        <Hero />
-        <About />
-        <TechStack />
-        <Skills />
-        <Education />
-        <Projects />
-        <Contact />
-        <Footer />
-      </main>
-    </SmoothScroll>
+    </>
   )
 }

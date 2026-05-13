@@ -240,7 +240,7 @@ export function Hero() {
               <Button
                 size="lg"
                 onClick={handleDownloadResume}
-                className="group relative overflow-hidden bg-gradient-to-r from-cyan to-electric-blue text-background font-semibold px-6 sm:px-8 shadow-lg shadow-cyan/25 hover:shadow-cyan/40 transition-shadow"
+                className="group relative overflow-hidden bg-linear-to-r from-cyan to-electric-blue text-background font-semibold px-6 sm:px-8 shadow-lg shadow-cyan/25 hover:shadow-cyan/40 transition-shadow"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Download className="w-4 h-4" />
@@ -256,7 +256,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="group border-border/50 hover:border-cyan/50 hover:bg-cyan/5 backdrop-blur-sm"
+                className="group hover:text-cyan-400 hover:border-cyan/50 hover:bg-cyan/5 hover:shadow-lg hover:shadow-cyan/25 hover:shadow-cyan/40 transition-shadow"
                 asChild
               >
                 <a href="#projects">

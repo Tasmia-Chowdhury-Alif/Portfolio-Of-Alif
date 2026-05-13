@@ -3,6 +3,12 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { SmoothScroll } from '@/components/smooth-scroll'
+import { PageLoader } from '@/components/page-loader'
+import { ScrollProgress } from '@/components/scroll-progress'
+import { CustomCursor } from '@/components/custom-cursor'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -61,7 +67,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          {children}
+          <SmoothScroll>
+            <PageLoader />
+            <CustomCursor />
+            <ScrollProgress />
+
+            <main className="relative overflow-hidden">
+              <Navbar />
+
+              {children}
+
+              <Footer />
+            </main>
+          </SmoothScroll>
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

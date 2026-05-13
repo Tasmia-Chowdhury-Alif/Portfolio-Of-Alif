@@ -468,21 +468,21 @@ function ProjectCard({
                     rounded-full
                     border-border/60
                     bg-background/80
-                    text-foreground
+                    text-white
                     backdrop-blur-sm
 
                     hover:-translate-y-0.5
                     hover:scale-[1.03]
-                    hover:bg-cyan/10
+                    hover:bg-cyan/40
                     hover:border-cyan/40
-                    hover:shadow-lg hover:shadow-cyan/10
+                    hover:shadow-lg hover:shadow-cyan/25
 
-                    hover:text-foreground
-                    dark:hover:text-white
+                    hover:text-background
 
                     active:scale-[0.98]
 
                     transition-all duration-300
+                    bg-linear-to-r from-cyan to-electric-blue font-semibold
                   "
                   asChild
                 >
@@ -503,17 +503,20 @@ function ProjectCard({
                     bg-transparent
                     text-foreground
 
-                    hover:-translate-y-0.5
-                    hover:scale-[1.03]
-                    hover:bg-secondary/80
-                    hover:shadow-md
-
                     hover:text-foreground
                     dark:hover:text-white
 
                     active:scale-[0.98]
 
                     transition-all duration-300
+
+                    hover:-translate-y-0.5
+                    hover:scale-[1.03]
+                    hover:bg-cyan/40
+                    hover:border-cyan/40
+                    hover:shadow-lg hover:shadow-cyan/25
+
+                    hover:bg-linear-to-r from-cyan to-electric-blue font-semibold
                   "
                   asChild
                 >
@@ -536,8 +539,6 @@ function ProjectCard({
 
                     hover:-translate-y-0.5
                     hover:scale-[1.03]
-                    hover:bg-secondary/80
-                    hover:shadow-md
 
                     hover:text-foreground
                     dark:hover:text-white
@@ -545,6 +546,13 @@ function ProjectCard({
                     active:scale-[0.98]
 
                     transition-all duration-300
+
+                    hover:bg-cyan/40
+                    hover:border-cyan/40
+                    hover:shadow-lg hover:shadow-cyan/25
+
+                    hover:bg-linear-to-r from-cyan to-electric-blue font-semibold
+                    
                   "
                   asChild
                 >
@@ -569,14 +577,14 @@ function ProjectCard({
                   bg-gradient-to-r
                   from-cyan/5
                   via-electric-blue/5
-                  to-indigo/5
-                  hover:border-cyan/40
+                  to-cyan/5
+                  hover:border-cyan/50
                   transition-all duration-300
                 "
               >
                 {/* Animated Glow */}
                 <div className="absolute inset-0 opacity-0 group-hover/details:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan/10 via-electric-blue/10 to-indigo/10" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan/10 via-electric-blue/10 to-cyan/10" />
                 </div>
 
                 <div className="relative flex items-center justify-between px-4 py-3">
@@ -732,7 +740,7 @@ export function Projects() {
             variant="outline"
             size="icon"
             onClick={goToPrevious}
-            className="w-10 h-10 rounded-full border-border/50 hover:border-cyan/50 hover:bg-cyan/5"
+            className="w-10 h-10 rounded-full hover:text-cyan-500 hover:border-cyan hover:bg-cyan/5 shadow-lg hover:shadow-cyan/40 transition-shadow"
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -758,14 +766,14 @@ export function Projects() {
             variant="outline"
             size="icon"
             onClick={goToNext}
-            className="w-10 h-10 rounded-full border-border/50 hover:border-cyan/50 hover:bg-cyan/5"
+            className="w-10 h-10 rounded-full hover:text-cyan-500 hover:border-cyan hover:bg-cyan/5 shadow-lg hover:shadow-cyan/40 transition-shadow"
           >
             <ChevronRight className="w-4 h-4" />
           </Button>
         </motion.div>
 
         {/* View More Button */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
@@ -786,7 +794,7 @@ export function Projects() {
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )
