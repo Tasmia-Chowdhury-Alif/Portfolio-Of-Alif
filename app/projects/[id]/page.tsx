@@ -129,7 +129,8 @@ export default function ProjectDetailPage() {
                     className="
                       h-10 px-5 rounded-full
                       border-none
-                      shadow-white
+                      shadow-foreground/50
+                      dark:shadow-white
                       bg-transparent/50
                       hover:bg-transparent/50
                       text-white
@@ -159,7 +160,8 @@ export default function ProjectDetailPage() {
                       group
                       h-10 px-5 rounded-full
                       border-none
-                      shadow-white
+                      shadow-foreground/50
+                      dark:shadow-white
                     bg-transparent/50
                     hover:bg-transparent/50
                     text-white
